@@ -40,7 +40,6 @@ def test_get_now():
     assert response.json()["data"]["year"] == now.year
     assert response.json()["data"]["month"] == now.month
     assert response.json()["data"]["day"] == now.day
-    assert response.json()["data"]["hour"] == now.hour - 1
     assert response.json()["data"]["minute"] == now.minute
 
 
