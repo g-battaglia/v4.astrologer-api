@@ -84,7 +84,8 @@ class SubjectModel(BaseModel):
 
     @field_validator("day")
     def validate_day(cls, value, values):
-        month = values.data["month"]
+        month = values.data.get("month")
+
         if month in [1, 3, 5, 7, 8, 10, 12]:
             if value < 1 or value > 31:
                 raise ValueError(f"Invalid day '{value}'. Please use a value between 1 and 31.")
