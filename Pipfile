@@ -9,9 +9,10 @@ pydantic-settings = "*"
 starlette = "*"
 fastapi = "*"
 uvicorn = "*"
-kerykeion = "*"
 types-pytz = "*"
 pytz = "*"
+scour = "*"
+kerykeion = "*"
 
 [dev-packages]
 black = "*"

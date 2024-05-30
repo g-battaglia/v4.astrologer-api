@@ -7,6 +7,7 @@ from requests import get as requests_get
 from pathlib import Path
 from datetime import datetime
 import json
+from scour import scour
 
 # Local
 from ..utils.internal_server_error_json_response import InternalServerErrorJsonResponse
@@ -204,13 +205,18 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
 
         kerykeion_chart = KerykeionChartSVG(astrological_subject, new_settings_file=new_config_path)
-        svg = kerykeion_chart.makeTemplate()
+        svg = kerykeion_chart.makeTemplate().replace("\n", "").replace("\t", "")
 
         if new_config_path:
             new_config_path.unlink()
 
         return JSONResponse(
-            content={"status": "OK", "data": data, "chart": svg, "aspects": kerykeion_chart.aspects_list},
+            content={
+                "status": "OK", 
+                "chart": svg, 
+                "data": data,
+                "aspects": kerykeion_chart.aspects_list
+            },
             status_code=200,
         )
 
@@ -315,7 +321,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             new_settings_file=new_config_path,
             chart_type="Synastry",
         )
-        svg = kerykeion_chart.makeTemplate().replace("\n", "")
+        svg = kerykeion_chart.makeTemplate().replace("\n", "").replace("\t", "")
 
         if new_config_path:
             new_config_path.unlink()
@@ -323,11 +329,11 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
         return JSONResponse(
             content={
                 "status": "OK",
+                "chart": svg,
                 "data": {
                     "first_subject": first_astrological_subject.model().model_dump(),
                     "second_subject": second_astrological_subject.model().model_dump(),
                 },
-                "chart": svg,
                 "aspects": kerykeion_chart.aspects_list,
             },
             status_code=200,
@@ -436,9 +442,9 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             first_astrological_subject,
             second_obj=second_astrological_subject,
             new_settings_file=new_config_path,
-            chart_type="Synastry",
+            chart_type="Transit",
         )
-        svg = kerykeion_chart.makeTemplate().replace("\n", "")
+        svg = kerykeion_chart.makeTemplate().replace("\n", "").replace("\t", "")
 
         if new_config_path:
             new_config_path.unlink()
@@ -446,11 +452,11 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
         return JSONResponse(
             content={
                 "status": "OK",
+                "chart": svg,
                 "data": {
                     "subject": first_astrological_subject.model().model_dump(),
                     "transit": second_astrological_subject.model().model_dump(),
                 },
-                "chart": svg,
                 "aspects": kerykeion_chart.aspects_list,
             },
             status_code=200,
