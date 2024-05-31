@@ -282,11 +282,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:186aab863cd98a898ecf6092bbad62ac6e1a2da04ffcf5a3a8b19d2fe20f4b69",
-                "sha256:1ad42523147765d5209fa0dfb86f19a4d4a5b716820cab1503d11253ade25b13"
+                "sha256:432988071c971714dae7a63b53dd5b510fdcd035be2be4d36dabc3e976ee9c82",
+                "sha256:692b8d4849ff64987353cbce4489b567a1375ffb31c1c4811bf4eea8c0a8f368"
             ],
             "index": "pypi",
-            "version": "==4.7.0"
+            "version": "==4.8.0"
         },
         "markdown-it-py": {
             "hashes": [

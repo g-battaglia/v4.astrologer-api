@@ -205,7 +205,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
 
         kerykeion_chart = KerykeionChartSVG(astrological_subject, new_settings_file=new_config_path)
-        svg = kerykeion_chart.makeTemplate().replace("\n", "").replace("\t", "")
+        svg = kerykeion_chart.makeTemplate(minify=True)
 
         if new_config_path:
             new_config_path.unlink()
@@ -321,7 +321,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             new_settings_file=new_config_path,
             chart_type="Synastry",
         )
-        svg = kerykeion_chart.makeTemplate().replace("\n", "").replace("\t", "")
+        svg = kerykeion_chart.makeTemplate(minify=True)
 
         if new_config_path:
             new_config_path.unlink()
@@ -444,7 +444,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             new_settings_file=new_config_path,
             chart_type="Transit",
         )
-        svg = kerykeion_chart.makeTemplate().replace("\n", "").replace("\t", "")
+        svg = kerykeion_chart.makeTemplate(minify=True)
 
         if new_config_path:
             new_config_path.unlink()
