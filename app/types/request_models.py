@@ -49,6 +49,7 @@ class SubjectModel(BaseModel):
     longitude: float = Field(description="The longitude of the birth location. Defaults on London.", examples=[0])
     latitude: float = Field(description="The latitude of the birth location. Defaults on London.", examples=[51.4825766])
     city: str = Field(description="The name of city of birth.", examples=["London"])
+    nation: str = Field(description="The name of the nation of birth.", examples=["GB"])
     timezone: str = Field(description="The timezone of the birth location.", examples=["Europe/London"])
     zodiac_type: Optional[str] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=["Tropic"])
 
@@ -129,6 +130,7 @@ class TransitSubjectModel(BaseModel):
     longitude: float = Field(description="The longitude of the birth location. Defaults on London.", examples=[0])
     latitude: float = Field(description="The latitude of the birth location. Defaults on London.", examples=[51.4825766])
     city: str = Field(description="The name of city of birth.", examples=["London"])
+    nation: str = Field(description="The name of the nation of birth.", examples=["GB"])
     timezone: str = Field(description="The timezone of the birth location.", examples=["Europe/London"])
     zodiac_type: Optional[str] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=["Tropic"])
 
