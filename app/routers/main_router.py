@@ -102,6 +102,7 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
     * `latitude` - The latitude of the birth location.
     * `longitude` - The longitude of the birth location.
     * `city` - The name of city of birth.
+    * `nation` - The nation of the birth location.
     * `timezone` - The timezone of the birth location.
     * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
     """
@@ -119,6 +120,7 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
             hour=subject.hour,
             minute=subject.minute,
             city=subject.city,
+            nation=subject.nation,
             lat=subject.latitude,
             lng=subject.longitude,
             tz_str=subject.timezone,
@@ -158,6 +160,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
         * `latitude` - The latitude of the birth location.
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
+        * `nation` - The nation of the birth location.
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -189,6 +192,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             hour=subject.hour,
             minute=subject.minute,
             city=subject.city,
+            nation=subject.nation,
             lat=subject.latitude,
             lng=subject.longitude,
             tz_str=subject.timezone,
@@ -242,6 +246,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
         * `timezone` - The timezone of the birth location.
+        * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
     * `second_subject` - The second astrological subject.
@@ -254,6 +259,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
         * `latitude` - The latitude of the birth location.
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
+        * `nation` - The nation of the birth location.
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -287,6 +293,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             hour=first_subject.hour,
             minute=first_subject.minute,
             city=first_subject.city,
+            nation=first_subject.nation,
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
@@ -302,6 +309,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             hour=second_subject.hour,
             minute=second_subject.minute,
             city=second_subject.city,
+            nation=second_subject.nation,
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
@@ -365,6 +373,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
         * `latitude` - The latitude of the birth location.
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
+        * `nation` - The nation of the birth location.
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -377,6 +386,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
         * `latitude` - The latitude of the transit location.
         * `longitude` - The longitude of the transit location.
         * `city` - The name of city of transit.
+        * `nation` - The nation of the transit location.
         * `timezone` - The timezone of the transit location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -410,6 +420,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             hour=first_subject.hour,
             minute=first_subject.minute,
             city=first_subject.city,
+            nation=first_subject.nation,
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
@@ -425,6 +436,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             hour=second_subject.hour,
             minute=second_subject.minute,
             city=second_subject.city,
+            nation=second_subject.nation,
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
@@ -487,6 +499,7 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             hour=first_subject.hour,
             minute=first_subject.minute,
             city=first_subject.city,
+            nation=first_subject.nation,
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
@@ -502,6 +515,7 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             hour=second_subject.hour,
             minute=second_subject.minute,
             city=second_subject.city,
+            nation=second_subject.nation,
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
@@ -545,6 +559,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
         * `latitude` - The latitude of the birth location.
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
+        * `nation` - The nation of the birth location.
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -558,6 +573,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
         * `latitude` - The latitude of the birth location.
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
+        * `nation` - The nation of the birth location.
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -588,6 +604,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             hour=first_subject.hour,
             minute=first_subject.minute,
             city=first_subject.city,
+            nation=first_subject.nation,
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
@@ -603,6 +620,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             hour=second_subject.hour,
             minute=second_subject.minute,
             city=second_subject.city,
+            nation=second_subject.nation,
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
@@ -654,6 +672,7 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
         * `latitude` - The latitude of the birth location.
         * `longitude` - The longitude of the birth location.
         * `city` - The name of city of birth.
+        * `nation` - The nation of the birth location.
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
@@ -682,6 +701,7 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             hour=subject.hour,
             minute=subject.minute,
             city=subject.city,
+            nation=subject.nation,
             lat=subject.latitude,
             lng=subject.longitude,
             tz_str=subject.timezone,

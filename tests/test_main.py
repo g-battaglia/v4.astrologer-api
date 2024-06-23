@@ -69,6 +69,8 @@ def test_birth_data():
     assert response.status_code == 200
     assert response.json()["status"] == "OK"
 
+    assert response.json()["data"]["nation"] == "IT"
+
     assert response.json()["data"]["sun"]["name"] == "Sun"
     assert response.json()["data"]["sun"]["quality"] == "Mutable"
     assert response.json()["data"]["sun"]["element"] == "Air"
