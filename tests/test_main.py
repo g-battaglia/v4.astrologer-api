@@ -59,6 +59,7 @@ def test_birth_data():
                 "longitude": 12.4963655,
                 "latitude": 41.9027835,
                 "city": "Roma",
+                "nation": "IT",
                 "timezone": "Europe/Rome",
                 "language": "IT",
             }
@@ -101,6 +102,7 @@ def test_relationship_score():
                 "longitude": 12.4963655,
                 "latitude": 41.9027835,
                 "city": "Roma",
+                "nation": "IT",
                 "timezone": "Europe/Rome",
                 "language": "IT",
             },
@@ -114,6 +116,7 @@ def test_relationship_score():
                 "longitude": 12.4963655,
                 "latitude": 41.9027835,
                 "city": "Roma",
+                "nation": "IT",
                 "timezone": "Europe/Rome",
                 "language": "IT",
             },
@@ -143,6 +146,7 @@ def test_birth_chart():
                 "longitude": 0,
                 "latitude": 51.4825766,
                 "city": "London",
+                "nation": "GB",
                 "timezone": "Europe/London",
             }
         },
