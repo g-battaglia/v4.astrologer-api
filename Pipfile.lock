@@ -32,13 +32,6 @@
             "markers": "python_version >= '3.8'",
             "version": "==4.4.0"
         },
-        "appdirs": {
-            "hashes": [
-                "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41",
-                "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"
-            ],
-            "version": "==1.4.4"
-        },
         "attrs": {
             "hashes": [
                 "sha256:935dc3b529c262f6cf76e50877d35a4bd3c1de194fd41f47a2b7ae8f19971f30",
@@ -282,11 +275,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:16abcab7795408b9a8b6c810ff6170f95758578de8826598e5bffb6d2db9db4b",
-                "sha256:33b59d2f31065563bdfe4f1d2fcea17db54bb4b30fd83348b6781c1a8709ef57"
+                "sha256:247e3841ba09a4abc0906d4a621e0e70d7f0270a98d828a10d752ce923e6d120",
+                "sha256:fd8db6445859da371865b3e81a7347ff0106e397041bfce431b48bb76e010959"
             ],
             "index": "pypi",
-            "version": "==4.10.0"
+            "version": "==4.10.1"
         },
         "markdown-it-py": {
             "hashes": [
@@ -421,6 +414,14 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==3.10.5"
+        },
+        "platformdirs": {
+            "hashes": [
+                "sha256:2d7a1657e36a80ea911db832a8a6ece5ee53d8de21edd5cc5879af6530b1bfee",
+                "sha256:38b7b51f512eed9e84a22788b4bce1de17c0adb134d6becb09836e37d8654cd3"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==4.2.2"
         },
         "pydantic": {
             "hashes": [
@@ -668,11 +669,11 @@
         },
         "requests-cache": {
             "hashes": [
-                "sha256:3a16021a4b5014b5b32af9c34f07cb911e99a69074d664dfd4fddb62a2997c21",
-                "sha256:eaed4eb5fd5c392ba5e7cfa000d4ab96b1d32c1a1620f37aa558c43741ac362b"
+                "sha256:1285151cddf5331067baa82598afe2d47c7495a1334bfe7a7d329b43e9fd3603",
+                "sha256:68abc986fdc5b8d0911318fbb5f7c80eebcd4d01bfacc6685ecf8876052511d1"
             ],
-            "markers": "python_version >= '3.7' and python_version < '4.0'",
-            "version": "==0.9.8"
+            "markers": "python_version >= '3.8'",
+            "version": "==1.2.1"
         },
         "rich": {
             "hashes": [
