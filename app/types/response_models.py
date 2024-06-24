@@ -12,7 +12,6 @@ class AspectModel(BaseModel):
     aspect: str = Field(description="The aspect between the two planets.")
     orbit: float = Field(description="The orbit between the two planets.")
     aspect_degrees: float = Field(description="The degrees of the aspect.")
-    color: str = Field(description="The color of the aspect.")
     aid: int = Field(description="The aspect id.")
     diff: float = Field(description="The difference between the two planets.")
     p1: int = Field(description="The id of the first planet.")

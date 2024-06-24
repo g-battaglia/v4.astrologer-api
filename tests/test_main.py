@@ -9,8 +9,7 @@ path.append(str(Path(__file__).parent.parent))
 
 from fastapi.testclient import TestClient
 from app.main import app
-from datetime import datetime
-
+from datetime import datetime, timezone
 
 client = TestClient(app)
 
@@ -31,7 +30,7 @@ def test_get_now():
     Tests if the now function returns the correct utm time.
     """
 
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     response = client.get("/api/v4/now")
 
     assert response.status_code == 200
@@ -201,7 +200,6 @@ def test_birth_chart():
     assert response.json()["aspects"][0]["aspect"] == "sextile"
     assert round(response.json()["aspects"][0]["orbit"]) == -2
     assert response.json()["aspects"][0]["aspect_degrees"] == 60
-    assert response.json()["aspects"][0]["color"] == "#d59e28"
     assert response.json()["aspects"][0]["aid"] == 3
     assert round(response.json()["aspects"][0]["diff"]) == 58
     assert response.json()["aspects"][0]["p1"] == 0

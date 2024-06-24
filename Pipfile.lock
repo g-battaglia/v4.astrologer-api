@@ -275,11 +275,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:247e3841ba09a4abc0906d4a621e0e70d7f0270a98d828a10d752ce923e6d120",
-                "sha256:fd8db6445859da371865b3e81a7347ff0106e397041bfce431b48bb76e010959"
+                "sha256:76e0ba6a6c3838095de2ae658c6d0f66c74439ad401fa9428882071ab91dc1c7",
+                "sha256:7be4b382a4678c75f81e075b7e8386bfe2ccfddafa513df87a60e40392a7c005"
             ],
             "index": "pypi",
-            "version": "==4.10.1"
+            "version": "==4.11.1"
         },
         "markdown-it-py": {
             "hashes": [
@@ -518,11 +518,11 @@
         },
         "pydantic-settings": {
             "hashes": [
-                "sha256:87fda838b64b5039b970cd47c3e8a1ee460ce136278ff672980af21516f6e6ce",
-                "sha256:e4ed62ad851670975ec11285141db888fd24947f9440bd4380d7d8788d4965de"
+                "sha256:11ad8bacb68a045f00e4f862c7a718c8a9ec766aa8fd4c32e39a0594b207b53a",
+                "sha256:c5802e3d62b78e82522319bbc9b8f8ffb28ad1c988a99311d04f2a6051fca0a7"
             ],
             "index": "pypi",
-            "version": "==2.3.3"
+            "version": "==2.3.4"
         },
         "pygments": {
             "hashes": [
