@@ -186,11 +186,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:36627369b240c31e9944a1385854259ce4f52a00804834762c00141325845d26",
-                "sha256:8fee3031fc815e989903e41d2a0f34d2bc8c7240608a3e8b023a34d46aec112f"
+                "sha256:b670e0ef0a0a4873da3fe0524a7aefdd825a8d1210560553bca0e773f64f7bc8",
+                "sha256:fda99f2a5448cc5cee5de41facf11506d4453cbc7eeec3584344faeba0c5e9fc"
             ],
             "index": "pypi",
-            "version": "==4.14.4"
+            "version": "==4.14.5"
         },
         "platformdirs": {
             "hashes": [
@@ -463,11 +463,11 @@
         },
         "uvicorn": {
             "hashes": [
-                "sha256:ac6fdbd4425c5fd17a9fe39daf4d4d075da6fdc80f653e5894cdc2fd98752bee",
-                "sha256:b2d86de274726e9878188fa07576c9ceeff90a839e2b6e25c917fe05f5a6c835"
+                "sha256:4b15decdda1e72be08209e860a1e10e92439ad5b97cf44cc945fcbee66fc5788",
+                "sha256:65fd46fe3fda5bdc1b03b94eb634923ff18cd35b2f084813ea79d1f103f711b5"
             ],
             "index": "pypi",
-            "version": "==0.30.5"
+            "version": "==0.30.6"
         }
     },
     "develop": {
