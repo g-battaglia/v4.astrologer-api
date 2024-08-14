@@ -186,11 +186,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:807f5f94432880e3d6d72596bb78b0a1467221a9fbd681df3029538abebdbec5",
-                "sha256:fae4dddb8400c2f2005f35b51dc0e5fedfdf5768897bd1beb19f33ee2620845a"
+                "sha256:2e6623d17e964392b549b067c0b690e2a3deaa31ada6d4b19dc4a117800431cc",
+                "sha256:8c28bbc7fdcc153266d46f53f62ca68105b510140f40520e5737fe1a30001ddd"
             ],
             "index": "pypi",
-            "version": "==4.14.7"
+            "version": "==4.14.8"
         },
         "platformdirs": {
             "hashes": [
