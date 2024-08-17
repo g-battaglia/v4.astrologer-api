@@ -162,11 +162,11 @@
         },
         "fastapi": {
             "hashes": [
-                "sha256:3487ded9778006a45834b8c816ec4a48d522e2631ca9e75ec5a774f1b052f821",
-                "sha256:d262bc56b7d101d1f4e8fc0ad2ac75bb9935fec504d2b7117686cec50710cf05"
+                "sha256:b2537146f8c23389a7faa8b03d0bd38d4986e6983874557d95eed2acc46448ef",
+                "sha256:bcbd45817fc2a1cd5da09af66815b84ec0d3d634eb173d1ab468ae3103e183e4"
             ],
             "index": "pypi",
-            "version": "==0.112.0"
+            "version": "==0.112.1"
         },
         "h11": {
             "hashes": [
@@ -186,11 +186,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:2e6623d17e964392b549b067c0b690e2a3deaa31ada6d4b19dc4a117800431cc",
-                "sha256:8c28bbc7fdcc153266d46f53f62ca68105b510140f40520e5737fe1a30001ddd"
+                "sha256:073fa04454fae7d85293a98b05541896112f6dedc37f4acb474b3bf636f1e80a",
+                "sha256:c45bac78ea61fece545180f000538c580db8046b54111af57671b785651d01a7"
             ],
             "index": "pypi",
-            "version": "==4.14.8"
+            "version": "==4.14.10"
         },
         "platformdirs": {
             "hashes": [
@@ -415,11 +415,11 @@
         },
         "starlette": {
             "hashes": [
-                "sha256:6fe59f29268538e5d0d182f2791a479a0c64638e6935d1c6989e63fb2699c6ee",
-                "sha256:9af890290133b79fc3db55474ade20f6220a364a0402e0b556e7cd5e1e093823"
+                "sha256:4ec6a59df6bbafdab5f567754481657f7ed90dc9d69b0c9ff017907dd54faeff",
+                "sha256:c7c0441065252160993a1a37cf2a73bb64d271b17303e0b0c1eb7191cfb12d75"
             ],
             "index": "pypi",
-            "version": "==0.37.2"
+            "version": "==0.38.2"
         },
         "terminaltables": {
             "hashes": [
