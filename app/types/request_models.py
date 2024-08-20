@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, field_validator
 from kerykeion.kr_types.settings_models import KerykeionChartSettingsModel
 from typing import Optional, Literal
 from pytz import all_timezones
+from kerykeion.kr_types.kr_literals import KerykeionChartTheme
 
 
 class SubjectModel(BaseModel):
@@ -142,6 +143,7 @@ class BirthChartRequestModel(BaseModel):
 
     subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     new_settings: KerykeionChartSettingsModel | None | Literal[False] = Field(default=False, description="The settings model for the Kerykeion library.", examples=[False])
+    theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
 
 
 class SynastryChartRequestModel(BaseModel):
@@ -152,7 +154,7 @@ class SynastryChartRequestModel(BaseModel):
     first_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     second_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     new_settings: KerykeionChartSettingsModel | None | Literal[False] = Field(default=False, description="The settings model for the Kerykeion library.", examples=[False])
-
+    theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
 
 class TransitChartRequestModel(BaseModel):
     """
@@ -162,6 +164,7 @@ class TransitChartRequestModel(BaseModel):
     first_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     transit_subject: TransitSubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     new_settings: KerykeionChartSettingsModel | None | Literal[False] = Field(default=False, description="The settings model for the Kerykeion library.", examples=[False])
+    theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
 
 
 class BirthDataRequestModel(BaseModel):

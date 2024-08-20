@@ -172,6 +172,12 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
 
         If not provided (or set to null/false), the default settings will be used.
 
+    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
+        Available themes are:
+        - "classic"
+        - "dark"
+        - "dark-high-contrast"
+        - "light"
 
     Response model:
     * `status` - The status of the request.
@@ -208,7 +214,11 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             new_config_path = current_path.parent.parent / "tmp" / f"kr.config.{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json"
             new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
 
-        kerykeion_chart = KerykeionChartSVG(astrological_subject, new_settings_file=new_config_path)
+        kerykeion_chart = KerykeionChartSVG(
+            astrological_subject,
+            new_settings_file=new_config_path,
+            theme=request_body.theme,
+        )
         svg = kerykeion_chart.makeTemplate(minify=True)
 
         if new_config_path:
@@ -271,6 +281,13 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
 
         If not provided (or set to null/false), the default settings will be used.
 
+    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
+        Available themes are:
+        - "classic"
+        - "dark"
+        - "dark-high-contrast"
+        - "light"
+
     Response model:
     * `status` - The status of the request.
     * `data` - The data of the astrological subjects.
@@ -328,6 +345,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             second_obj=second_astrological_subject,
             new_settings_file=new_config_path,
             chart_type="Synastry",
+            theme=synastry_chart_request.theme,
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
 
@@ -398,6 +416,13 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
 
         If not provided (or set to null/false), the default settings will be used.
 
+    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
+        Available themes are:
+        - "classic"
+        - "dark"
+        - "dark-high-contrast"
+        - "light"
+
     Response model:
     * `status` - The status of the request.
     * `data` - The data of the astrological subjects.
@@ -455,6 +480,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             second_obj=second_astrological_subject,
             new_settings_file=new_config_path,
             chart_type="Transit",
+            theme=transit_chart_request.theme,
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
 
@@ -583,6 +609,13 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             * None (empty field or not provided)
             * False (explicitly set to False)
 
+    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
+        Available themes are:
+        - "classic"
+        - "dark"
+        - "dark-high-contrast"
+        - "light"
+
     Response model:
     * `status` - The status of the request.
     * `data` - The data of the two subjects.
@@ -681,6 +714,14 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             * KerykeionChartSettingsModel
             * None (empty field or not provided)
             * False (explicitly set to False)
+
+    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
+        Available themes are:
+        - "classic"
+        - "dark"
+        - "dark-high-contrast"
+        - "light"
+
     Response model:
     * `status` - The status of the request.
     * `data` - The data of the two subjects.
