@@ -164,14 +164,6 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.
-        Accepted values are:
-            * KerykeionChartSettingsModel
-            * null (empty field or not provided)
-            * false (explicitly set to False)
-
-        If not provided (or set to null/false), the default settings will be used.
-
     * `theme` - Optional field. The theme for the chart. The default theme is "classic".
         Available themes are:
         - "classic"
@@ -187,7 +179,6 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     subject = request_body.subject
-    new_settings = request_body.new_settings
 
     try:
         astrological_subject = AstrologicalSubject(
@@ -207,22 +198,12 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
         )
 
         data = astrological_subject.model().model_dump()
-        new_config_path = None
-
-        if new_settings:
-            current_path = Path(__file__).resolve()
-            new_config_path = current_path.parent.parent / "tmp" / f"kr.config.{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json"
-            new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
 
         kerykeion_chart = KerykeionChartSVG(
             astrological_subject,
-            new_settings_file=new_config_path,
             theme=request_body.theme,
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
-
-        if new_config_path:
-            new_config_path.unlink()
 
         return JSONResponse(
             content={
@@ -273,14 +254,6 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.
-        Accepted values are:
-            * KerykeionChartSettingsModel
-            * null (empty field or not provided)
-            * false (explicitly set to False)
-
-        If not provided (or set to null/false), the default settings will be used.
-
     * `theme` - Optional field. The theme for the chart. The default theme is "classic".
         Available themes are:
         - "classic"
@@ -299,7 +272,6 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
 
     first_subject = synastry_chart_request.first_subject
     second_subject = synastry_chart_request.second_subject
-    new_settings = synastry_chart_request.new_settings
 
     try:
         first_astrological_subject = AstrologicalSubject(
@@ -334,23 +306,13 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             online=False,
         )
 
-        new_config_path = None
-        if new_settings:
-            current_path = Path(__file__).resolve()
-            new_config_path = current_path.parent.parent / "tmp" / f"kr.config.{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json"
-            new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
-
         kerykeion_chart = KerykeionChartSVG(
             first_astrological_subject,
             second_obj=second_astrological_subject,
-            new_settings_file=new_config_path,
             chart_type="Synastry",
             theme=synastry_chart_request.theme,
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
-
-        if new_config_path:
-            new_config_path.unlink()
 
         return JSONResponse(
             content={
@@ -408,14 +370,6 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
         * `timezone` - The timezone of the transit location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.
-        Accepted values are:
-            * KerykeionChartSettingsModel
-            * null (empty field or not provided)
-            * false (explicitly set to False)
-
-        If not provided (or set to null/false), the default settings will be used.
-
     * `theme` - Optional field. The theme for the chart. The default theme is "classic".
         Available themes are:
         - "classic"
@@ -434,7 +388,6 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
 
     first_subject = transit_chart_request.first_subject
     second_subject = transit_chart_request.transit_subject
-    new_settings = transit_chart_request.new_settings
 
     try:
         first_astrological_subject = AstrologicalSubject(
@@ -469,23 +422,13 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             online=False,
         )
 
-        new_config_path = None
-        if new_settings:
-            current_path = Path(__file__).resolve()
-            new_config_path = current_path.parent.parent / "tmp" / f"kr.config.{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json"
-            new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
-
         kerykeion_chart = KerykeionChartSVG(
             first_astrological_subject,
             second_obj=second_astrological_subject,
-            new_settings_file=new_config_path,
             chart_type="Transit",
             theme=transit_chart_request.theme,
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
-
-        if new_config_path:
-            new_config_path.unlink()
 
         return JSONResponse(
             content={
@@ -603,12 +546,6 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.
-        Accepted values are:
-            * KerykeionChartSettingsModel
-            * None (empty field or not provided)
-            * False (explicitly set to False)
-
     * `theme` - Optional field. The theme for the chart. The default theme is "classic".
         Available themes are:
         - "classic"
@@ -626,7 +563,6 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
 
     first_subject = aspects_request_content.first_subject
     second_subject = aspects_request_content.second_subject
-    new_settings = aspects_request_content.new_settings
 
     try:
         first_astrological_subject = AstrologicalSubject(
@@ -661,16 +597,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             online=False,
         )
 
-        new_config_path = None
-        if new_settings:
-            current_path = Path(__file__).resolve()
-            new_config_path = current_path.parent.parent / "tmp" / f"kr.config.{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json"
-            new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
-
         aspects = SynastryAspects(first_astrological_subject, second_astrological_subject).relevant_aspects
-
-        if new_config_path:
-            new_config_path.unlink()
 
         return JSONResponse(
             content={
@@ -709,12 +636,6 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.
-        Accepted values are:
-            * KerykeionChartSettingsModel
-            * None (empty field or not provided)
-            * False (explicitly set to False)
-
     * `theme` - Optional field. The theme for the chart. The default theme is "classic".
         Available themes are:
         - "classic"
@@ -731,7 +652,6 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     subject = aspects_request_content.subject
-    new_settings = aspects_request_content.new_settings
 
     try:
         first_astrological_subject = AstrologicalSubject(
@@ -750,16 +670,7 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             online=False,
         )
 
-        new_config_path = None
-        if new_settings:
-            current_path = Path(__file__).resolve()
-            new_config_path = current_path.parent.parent / "tmp" / f"kr.config.{datetime.now().strftime('%Y%m%d%H%M%S%f')}.json"
-            new_config_path.write_text(json.dumps(new_settings.model_dump()), encoding="utf-8")
-
-        aspects = NatalAspects(first_astrological_subject, new_settings_file=new_config_path).relevant_aspects
-
-        if new_config_path:
-            new_config_path.unlink()
+        aspects = NatalAspects(first_astrological_subject).relevant_aspects
 
         return JSONResponse(
             content={
