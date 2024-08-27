@@ -37,6 +37,7 @@ async def status(request: Request) -> JSONResponse:
     response_dict = {
         "status": "OK",
         "environment": settings.env_type,
+        "debug": settings.debug,
     }
 
     return JSONResponse(content=response_dict, status_code=200)
