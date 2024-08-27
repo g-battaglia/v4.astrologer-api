@@ -41,6 +41,7 @@ class Settings(BaseSettings):
     # Environment variables
     rapid_api_secret_key: str = getenv("RAPID_API_SECRET_KEY", "")
     geonames_username: str = getenv("GEONAMES_USERNAME", "")
+    env_type: str | bool = ENV_TYPE
 
     # Config file
     admin_email: str = config["admin_email"]

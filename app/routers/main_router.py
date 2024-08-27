@@ -31,8 +31,13 @@ async def status(request: Request) -> JSONResponse:
     Returns the status of the API.
     """
 
+    from ..config.settings import settings
+
     write_request_to_log(20, request, "API is up and running")
-    response_dict = {"status": "OK"}
+    response_dict = {
+        "status": "OK",
+        "environment": settings.env_type,
+    }
 
     return JSONResponse(content=response_dict, status_code=200)
 
