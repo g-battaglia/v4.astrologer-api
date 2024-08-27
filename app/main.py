@@ -33,7 +33,10 @@ app.include_router(main_router.router, tags=["main_router"])
 # Middleware 
 #------------------------------------------------------------------------------
 
-if settings.debug is not True:
+if settings.debug is True:
+    pass
+
+else:
     app.add_middleware(
         SecretKeyCheckerMiddleware,
         secret_key_name=settings.secret_key_name,
