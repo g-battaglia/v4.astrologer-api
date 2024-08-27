@@ -9,11 +9,10 @@
     "/api/v4/now": {
       "get": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Get Now",
-        "description": "Returns the current astrological data in JSON format.\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subject.",
+        "description": "Retrieve the current astrological data in JSON format.\n\nThis endpoint generates astrological data for the current moment. \nThe data is returned in a structured JSON format.",
         "operationId": "get_now_api_v4_now_get",
         "responses": {
           "200": {
@@ -57,11 +56,10 @@
     "/api/v4/birth-data": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Birth Data",
-        "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `nation` - The nation of the birth location.\n* `timezone` - The timezone of the birth location.\n* `zodiac_type` - The type of zodiac used (Tropic or Sidereal).",
+        "description": "Returns the Birth data in JSON format.",
         "operationId": "birth_data_api_v4_birth_data_post",
         "requestBody": {
           "content": {
@@ -125,11 +123,10 @@
     "/api/v4/birth-chart": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Birth Chart",
-        "description": "Returns the Birth data in JSON format.\n\nRequest model:\n* `subject` - The first astrological subject.\n    * `name` - The name of the person to get the Birth Chart for.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `theme` - Optional field. The theme for the chart. The default theme is \"classic\".\n    Available themes are:\n    - \"classic\"\n    - \"dark\"\n    - \"dark-high-contrast\"\n    - \"light\"\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subject.",
+        "description": "Returns the Birth data in JSON format.",
         "operationId": "birth_chart_api_v4_birth_chart_post",
         "requestBody": {
           "content": {
@@ -193,11 +190,10 @@
     "/api/v4/synastry-chart": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Synastry Chart",
-        "description": "Returns the Synastry data in JSON format.\n\nRequest model:\n* `first_subject` - The first astrological subject.\n    * `name` - The name of the first subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `timezone` - The timezone of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `second_subject` - The second astrological subject.\n    * `name` - The name of the second subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `theme` - Optional field. The theme for the chart. The default theme is \"classic\".\n    Available themes are:\n    - \"classic\"\n    - \"dark\"\n    - \"dark-high-contrast\"\n    - \"light\"\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subjects.\n* `chart` - The SVG representation of the chart.\n* `aspects` - The list of aspects between the two subjects.",
+        "description": "Returns the Synastry data in JSON format.",
         "operationId": "synastry_chart_api_v4_synastry_chart_post",
         "requestBody": {
           "content": {
@@ -259,11 +255,10 @@
     "/api/v4/transit-chart": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Transit Chart",
-        "description": "Returns the Birth data in JSON format.\n\nRequest model:\n* `first_subject` - The first astrological subject.\n    * `name` - The name of the person to get the Birth Chart for.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `second_subject` - The second astrological subject.\n    * `year` - The year of transit.\n    * `month` - The month of transit.\n    * `day` - The day of transit.\n    * `hour` - The hour of transit.\n    * `minute` - The minute of transit.\n    * `latitude` - The latitude of the transit location.\n    * `longitude` - The longitude of the transit location.\n    * `city` - The name of city of transit.\n    * `nation` - The nation of the transit location.\n    * `timezone` - The timezone of the transit location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `theme` - Optional field. The theme for the chart. The default theme is \"classic\".\n    Available themes are:\n    - \"classic\"\n    - \"dark\"\n    - \"dark-high-contrast\"\n    - \"light\"\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subjects.\n* `chart` - The SVG representation of the chart.\n* `aspects` - The list of aspects between the two subjects.",
+        "description": "Returns the Birth data in JSON format.",
         "operationId": "transit_chart_api_v4_transit_chart_post",
         "requestBody": {
           "content": {
@@ -327,11 +322,10 @@
     "/api/v4/synastry-aspects-data": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Synastry Aspects Data",
-        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.\n\nRequest model:\n* `first_subject` - The first astrological subject.\n    * `name` - The name of the first subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `second_subject` - The second astrological subject.\n    * `name` - The name of the second subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the two subjects.\n* `aspects` - The aspects between the two subjects.",
+        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.",
         "operationId": "synastry_aspects_data_api_v4_synastry_aspects_data_post",
         "requestBody": {
           "content": {
@@ -395,11 +389,10 @@
     "/api/v4/natal-aspects-data": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Natal Aspects Data",
-        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.\n\nRequest model:\n* `subject` - The astrological subject.\n    * `name` - The name of the person to get the aspects for.\n    * `year` - Year of birth.\n    * `month` - Month of birth.\n    * `day` - Day of birth.\n    * `hour` - Hour of birth.\n    * `minute` - Minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the two subjects.\n* `aspects` - The aspects between the two subjects.",
+        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.",
         "operationId": "natal_aspects_data_api_v4_natal_aspects_data_post",
         "requestBody": {
           "content": {
@@ -463,8 +456,7 @@
     "/api/v4/relationship-score": {
       "post": {
         "tags": [
-          "main_router",
-          "main_router"
+          "Endpoints"
         ],
         "summary": "Relationship Score",
         "description": "Get compatibility score number according to Ciro Discepolo method.",
