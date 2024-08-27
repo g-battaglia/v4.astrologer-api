@@ -655,8 +655,8 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             "status": "OK",
             "score": score_model.score_value,
             "score_description": score_model.score_description,
-            "aspects": [aspect.model_dump() for aspect in score_model.aspects],
             "is_destiny_sign": score_model.is_destiny_sign,
+            "aspects": [aspect.model_dump() for aspect in score_model.aspects],
             "data": {
                 "first_subject": first_astrological_subject.model().model_dump(),
                 "second_subject": second_astrological_subject.model().model_dump(),
