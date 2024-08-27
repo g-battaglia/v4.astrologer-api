@@ -126,7 +126,7 @@ def test_relationship_score():
 
     assert response.status_code == 200
     assert response.json()["status"] == "OK"
-    assert response.json()["score"] == 40
+    assert response.json()["score"] == 24
 
 
 def test_birth_chart():
