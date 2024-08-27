@@ -12,8 +12,8 @@ uvicorn = "*"
 types-pytz = "*"
 pytz = "*"
 scour = "*"
-kerykeion = "*"
 typing-extensions = "*"
+kerykeion = "*"
 
 [dev-packages]
 black = "*"

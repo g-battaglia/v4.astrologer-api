@@ -303,8 +303,8 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
-            zodiac_type=first_astrological_subject, # type: ignore
-            sidereal_mode=second_subject.sidereal_mode,
+            zodiac_type=first_astrological_subject.zodiac_type, # type: ignore
+            sidereal_mode=first_subject.sidereal_mode,
             online=False,
         )
 
