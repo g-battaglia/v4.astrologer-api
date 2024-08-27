@@ -1,46 +1,10 @@
 from pydantic import BaseModel, Field, field_validator
-from typing import Optional, Literal
+from typing import Optional, get_args, Union
 from pytz import all_timezones
-from kerykeion.kr_types.kr_literals import KerykeionChartTheme
+from kerykeion.kr_types.kr_literals import KerykeionChartTheme, KerykeionChartLanguage, SiderealMode, ZodiacType
+from abc import ABC
 
-
-class SubjectModel(BaseModel):
-    """
-    Represents the astrological data for a specific subject.
-
-    Args:
-        name (str): Name of the astrological data.
-        year (int): Year of the astrological data.
-        month (int): Month of the astrological data.
-        day (int): Day of the astrological data.
-        hour (int): Hour of the astrological data.
-        minute (int): Minute of the astrological data.
-        city (str, optional): City for which the astrological data is calculated.
-        nation (str, optional): Nation for which the astrological data is calculated.
-        lng (float, optional): Longitude of the location for which the astrological data is calculated.
-        lat (float, optional): Latitude of the location for which the astrological data is calculated.
-        tz_str (str): Time zone string for the location for which the astrological data is calculated.
-        zodiac_type (str): Type of zodiac used (Tropic or Sidereal).
-
-    Attributes:
-        name: Name of the astrological data.
-        year: Year of the astrological data.
-        month: Month of the astrological data.
-        day: Day of the astrological data.
-        hour: Hour of the astrological data.
-        minute: Minute of the astrological data.
-        city: City for which the astrological data is calculated.
-        nation: Nation for which the astrological data is calculated.
-        lng: Longitude of the location for which the astrological data is calculated.
-        lat: Latitude of the location for which the astrological data is calculated.
-        tz_str: Time zone string for the location for which the astrological data is calculated.
-        zodiac_type: Type of zodiac used (Tropic or Sidereal).
-
-    Raises:
-        ValueError: If zodiac_type is not either 'Tropic' or 'Sidereal'.
-    """
-
-    name: str = Field(description="The name of the person to get the Birth Chart for.", examples=["John Doe"])
+class AbstractBaseSubjectModel(BaseModel, ABC):
     year: int = Field(description="The year of birth.", examples=[1980])
     month: int = Field(description="The month of birth.", examples=[12])
     day: int = Field(description="The day of birth.", examples=[12])
@@ -51,13 +15,7 @@ class SubjectModel(BaseModel):
     city: str = Field(description="The name of city of birth.", examples=["London"])
     nation: Optional[str] = Field(default="GB", description="The name of the nation of birth.", examples=["GB"])
     timezone: str = Field(description="The timezone of the birth location.", examples=["Europe/London"])
-    zodiac_type: Optional[str] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=["Tropic"])
 
-    @field_validator("zodiac_type")
-    def validate_zodiac_type(cls, value):
-        if value not in ("Tropic", "Sidereal"):
-            raise ValueError(f"Invalid zodiac_type '{value}'. Please use either 'Tropic' or 'Sidereal'.")
-        return value
 
     @field_validator("longitude")
     def validate_longitude(cls, value):
@@ -74,7 +32,7 @@ class SubjectModel(BaseModel):
     @field_validator("timezone")
     def validate_timezone(cls, value):
         if value not in all_timezones:
-            raise ValueError(f"Invalid timezone '{value}'. Please use a valid timezone.")
+            raise ValueError(f"Invalid timezone '{value}'. Please use a valid timezone. You can find a list of valid timezones at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.")
         return value
 
     @field_validator("month")
@@ -116,24 +74,33 @@ class SubjectModel(BaseModel):
             raise ValueError(f"Invalid year '{value}'. Please use a value between 1800 and 2300.")
         return value
 
+    @field_validator("nation")
+    def validate_nation(cls, value):
+        if len(value) != 2:
+            raise ValueError(f"Invalid nation '{value}'. Please use a two-letter country code.")
+        return value
 
-class TransitSubjectModel(BaseModel):
-    """
-    Represents the data needed to create a subject in the astrological data, specifically for transits.
-    """
 
-    year: int = Field(description="The year of birth.", examples=[1980])
-    month: int = Field(description="The month of birth.", examples=[12])
-    day: int = Field(description="The day of birth.", examples=[12])
-    hour: int = Field(description="The hour of birth.", examples=[12])
-    minute: int = Field(description="The minute of birth.", examples=[12])
-    longitude: float = Field(description="The longitude of the birth location. Defaults on London.", examples=[0])
-    latitude: float = Field(description="The latitude of the birth location. Defaults on London.", examples=[51.4825766])
-    city: str = Field(description="The name of city of birth.", examples=["London"])
-    nation: Optional[str] = Field(default="GB", description="The name of the nation of birth.", examples=["GB"])
-    timezone: str = Field(description="The timezone of the birth location.", examples=["Europe/London"])
-    zodiac_type: Optional[str] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=["Tropic"])
+class SubjectModel(AbstractBaseSubjectModel):
+    name: str = Field(description="The name of the person to get the Birth Chart for.", examples=["John Doe"])
+    zodiac_type: Optional[ZodiacType] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=list(get_args(ZodiacType)))
+    sidereal_mode: Union[SiderealMode, None] = Field(default=None, description="The sidereal mode used.", examples=[None])
 
+    @field_validator("zodiac_type")
+    def validate_zodiac_type(cls, value, info):
+        if info.data.get('sidereal_mode') and value != "Sidereal":
+            raise ValueError(f"Invalid zodiac_type '{value}'. Please use 'Sidereal' when sidereal_mode is set.")
+        return value
+
+    @field_validator("sidereal_mode")
+    def validate_sidereal_mode(cls, value, info):
+        # If sidereal mode is set, zodiac type must be Sidereal
+        if value and info.data.get('zodiac_type') != "Sidereal":
+            raise ValueError(f"Invalid sidereal_mode '{value}'. Please use 'Sidereal' as zodiac_type when sidereal_mode is set. If you want to use the default sidereal mode, do not set this field or set it to None.")
+        return value
+
+class TransitSubjectModel(AbstractBaseSubjectModel):
+    ...
 
 class BirthChartRequestModel(BaseModel):
     """
@@ -142,7 +109,7 @@ class BirthChartRequestModel(BaseModel):
 
     subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
-
+    language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
 
 class SynastryChartRequestModel(BaseModel):
     """
@@ -152,6 +119,7 @@ class SynastryChartRequestModel(BaseModel):
     first_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     second_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
+    language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
 
 class TransitChartRequestModel(BaseModel):
     """
@@ -161,6 +129,7 @@ class TransitChartRequestModel(BaseModel):
     first_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     transit_subject: TransitSubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
+    language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
 
 
 class BirthDataRequestModel(BaseModel):

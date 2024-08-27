@@ -25,7 +25,7 @@ write_request_to_log = get_write_request_to_log(logger)
 router = APIRouter()
 
 
-@router.get("/", tags=["main_router"], response_description="Status of the API", response_model=BirthDataResponseModel)
+@router.get("/", tags=["main_router"], response_description="Status of the API", response_model=BirthDataResponseModel, include_in_schema=False)
 async def status(request: Request) -> JSONResponse:
     """
     Returns the status of the API.
@@ -88,19 +88,6 @@ async def get_now(request: Request) -> JSONResponse:
 async def birth_data(birth_data_request: BirthDataRequestModel, request: Request):
     """
     Returns the Birth data in JSON format.
-
-    * `name` - The name of the person to get the Birth Chart for.
-    * `year` - The year of birth.
-    * `month` - The month of birth.
-    * `day` - The day of birth.
-    * `hour` - The hour of birth.
-    * `minute` - The minute of birth.
-    * `latitude` - The latitude of the birth location.
-    * `longitude` - The longitude of the birth location.
-    * `city` - The name of city of birth.
-    * `nation` - The nation of the birth location.
-    * `timezone` - The timezone of the birth location.
-    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
     """
 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
@@ -121,6 +108,7 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
             lng=subject.longitude,
             tz_str=subject.timezone,
             zodiac_type=subject.zodiac_type, # type: ignore
+            sidereal_mode=subject.sidereal_mode,
             online=False,
         )
 
@@ -144,32 +132,6 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
 async def birth_chart(request_body: BirthChartRequestModel, request: Request):
     """
     Returns the Birth data in JSON format.
-
-    Request model:
-    * `subject` - The first astrological subject.
-        * `name` - The name of the person to get the Birth Chart for.
-        * `year` - The year of birth.
-        * `month` - The month of birth.
-        * `day` - The day of birth.
-        * `hour` - The hour of birth.
-        * `minute` - The minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `nation` - The nation of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
-        Available themes are:
-        - "classic"
-        - "dark"
-        - "dark-high-contrast"
-        - "light"
-
-    Response model:
-    * `status` - The status of the request.
-    * `data` - The data of the astrological subject.
     """
 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
@@ -190,6 +152,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             lng=subject.longitude,
             tz_str=subject.timezone,
             zodiac_type=subject.zodiac_type, # type: ignore
+            sidereal_mode=subject.sidereal_mode,
             online=False,
         )
 
@@ -220,48 +183,6 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
 async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, request: Request):
     """
     Returns the Synastry data in JSON format.
-
-    Request model:
-    * `first_subject` - The first astrological subject.
-        * `name` - The name of the first subject.
-        * `year` - The year of birth.
-        * `month` - The month of birth.
-        * `day` - The day of birth.
-        * `hour` - The hour of birth.
-        * `minute` - The minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `timezone` - The timezone of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    * `second_subject` - The second astrological subject.
-        * `name` - The name of the second subject.
-        * `year` - The year of birth.
-        * `month` - The month of birth.
-        * `day` - The day of birth.
-        * `hour` - The hour of birth.
-        * `minute` - The minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `nation` - The nation of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
-        Available themes are:
-        - "classic"
-        - "dark"
-        - "dark-high-contrast"
-        - "light"
-
-    Response model:
-    * `status` - The status of the request.
-    * `data` - The data of the astrological subjects.
-    * `chart` - The SVG representation of the chart.
-    * `aspects` - The list of aspects between the two subjects.
     """
 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
@@ -283,6 +204,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
+            sidereal_mode=first_subject.sidereal_mode,
             online=False,
         )
 
@@ -299,6 +221,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
             zodiac_type=second_subject.zodiac_type, # type: ignore
+            sidereal_mode=second_subject.sidereal_mode,
             online=False,
         )
 
@@ -337,47 +260,6 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
 async def transit_chart(transit_chart_request: TransitChartRequestModel, request: Request):
     """
     Returns the Birth data in JSON format.
-
-    Request model:
-    * `first_subject` - The first astrological subject.
-        * `name` - The name of the person to get the Birth Chart for.
-        * `year` - The year of birth.
-        * `month` - The month of birth.
-        * `day` - The day of birth.
-        * `hour` - The hour of birth.
-        * `minute` - The minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `nation` - The nation of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    * `second_subject` - The second astrological subject.
-        * `year` - The year of transit.
-        * `month` - The month of transit.
-        * `day` - The day of transit.
-        * `hour` - The hour of transit.
-        * `minute` - The minute of transit.
-        * `latitude` - The latitude of the transit location.
-        * `longitude` - The longitude of the transit location.
-        * `city` - The name of city of transit.
-        * `nation` - The nation of the transit location.
-        * `timezone` - The timezone of the transit location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
-        Available themes are:
-        - "classic"
-        - "dark"
-        - "dark-high-contrast"
-        - "light"
-
-    Response model:
-    * `status` - The status of the request.
-    * `data` - The data of the astrological subjects.
-    * `chart` - The SVG representation of the chart.
-    * `aspects` - The list of aspects between the two subjects.
     """
 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
@@ -398,7 +280,8 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
-            zodiac_type=first_subject.zodiac_type,
+            zodiac_type=first_subject.zodiac_type, # type: ignore
+            sidereal_mode=first_subject.sidereal_mode,
             online=False,
         )
 
@@ -414,7 +297,8 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
-            zodiac_type=second_subject.zodiac_type,
+            zodiac_type=first_astrological_subject, # type: ignore
+            sidereal_mode=second_subject.sidereal_mode,
             online=False,
         )
 
@@ -448,40 +332,6 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
 async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestModel, request: Request) -> JSONResponse:
     """
     Get the data of a synastry. It returns the data of the two subjects and the aspects between them.
-
-    Request model:
-    * `first_subject` - The first astrological subject.
-        * `name` - The name of the first subject.
-        * `year` - The year of birth.
-        * `month` - The month of birth.
-        * `day` - The day of birth.
-        * `hour` - The hour of birth.
-        * `minute` - The minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `nation` - The nation of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    * `second_subject` - The second astrological subject.
-        * `name` - The name of the second subject.
-        * `year` - The year of birth.
-        * `month` - The month of birth.
-        * `day` - The day of birth.
-        * `hour` - The hour of birth.
-        * `minute` - The minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `nation` - The nation of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    Response model:
-    * `status` - The status of the request.
-    * `data` - The data of the two subjects.
-    * `aspects` - The aspects between the two subjects.
     """
 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
@@ -503,6 +353,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
+            sidereal_mode=first_subject.sidereal_mode,
             online=False,
         )
 
@@ -519,6 +370,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
             zodiac_type=second_subject.zodiac_type, # type: ignore
+            sidereal_mode=second_subject.sidereal_mode,
             online=False,
         )
 
@@ -545,26 +397,6 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
 async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, request: Request) -> JSONResponse:
     """
     Get the data of a synastry. It returns the data of the two subjects and the aspects between them.
-
-    Request model:
-    * `subject` - The astrological subject.
-        * `name` - The name of the person to get the aspects for.
-        * `year` - Year of birth.
-        * `month` - Month of birth.
-        * `day` - Day of birth.
-        * `hour` - Hour of birth.
-        * `minute` - Minute of birth.
-        * `latitude` - The latitude of the birth location.
-        * `longitude` - The longitude of the birth location.
-        * `city` - The name of city of birth.
-        * `nation` - The nation of the birth location.
-        * `timezone` - The timezone of the birth location.
-        * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
-
-    Response model:
-    * `status` - The status of the request.
-    * `data` - The data of the two subjects.
-    * `aspects` - The aspects between the two subjects.
     """
 
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
@@ -585,6 +417,7 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             lng=subject.longitude,
             tz_str=subject.timezone,
             zodiac_type=subject.zodiac_type, # type: ignore
+            sidereal_mode=subject.sidereal_mode,
             online=False,
         )
 
@@ -629,6 +462,7 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
+            sidereal_mode=first_subject.sidereal_mode,
             online=False,
         )
 
@@ -645,6 +479,7 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
             zodiac_type=second_subject.zodiac_type, # type: ignore
+            sidereal_mode=second_subject.sidereal_mode,
             online=False,
         )
 

@@ -1,1 +1,2485 @@
-{"openapi": "3.1.0", "info": {"title": "Astrologer API", "description": "An API for astrological calculations.", "version": "4.0.0"}, "paths": {"/": {"get": {"tags": ["main_router", "main_router"], "summary": "Status", "description": "Returns a welcome message.", "operationId": "status__get", "responses": {"200": {"description": "Status of the API", "content": {"application/json": {"schema": {"type": "object", "title": "Response Status  Get"}}}}}}}, "/api/v4/now": {"get": {"tags": ["main_router", "main_router"], "summary": "Get Now", "description": "Returns the current astrological data in JSON format.", "operationId": "get_now_api_v4_now_get", "responses": {"200": {"description": "Current astrological data", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/AstrologicalSubjectModel"}}}}}}}, "/api/v4/birth-data": {"post": {"tags": ["main_router", "main_router"], "summary": "Birth Data", "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `timezone` - The timezone of the birth location.\n* `language` - The language of the birth chart, currently just English, Italian and Portuguese are available.\n* `excluded_points` - The list of points to exclude from the birth chart. Defaults to an empty list.", "operationId": "birth_data_api_v4_birth_data_post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/BirthDataRequestModel"}}}, "required": true}, "responses": {"200": {"description": "Birth data", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/AstrologicalSubjectModel"}}}}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/api/v4/birth-data/custom": {"post": {"tags": ["main_router", "main_router"], "summary": "Birth Data Custom", "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `timezone` - The timezone of the birth location.\n* `language` - The language of the birth chart, currently just English, Italian and Portuguese are available.\n* `excluded_points` - The list of points to exclude from the birth chart. Defaults to an empty list.", "operationId": "birth_data_custom_api_v4_birth_data_custom_post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/BirthDataRequestModel"}}}, "required": true}, "responses": {"200": {"description": "Birth data", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/AstrologicalSubjectModel"}}}}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/api/v4/birth-chart": {"post": {"tags": ["main_router", "main_router"], "summary": "Birth Chart", "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `timezone` - The timezone of the birth location.\n* `language` - The language of the birth chart, currently just English, Italian and Portuguese are available.\n* `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.\n    If not provided, the default settings will be used.", "operationId": "birth_chart_api_v4_birth_chart_post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/BirthChartRequestModel"}}}, "required": true}, "responses": {"200": {"description": "Birth data", "content": {"application/json": {"schema": {}}}}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/api/v4/relationship-score": {"post": {"tags": ["main_router", "main_router"], "summary": "Discepolo Score", "description": "Get compatibility score number according to Ciro Discepolo method.", "operationId": "discepolo_score_api_v4_relationship_score_post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Body_discepolo_score_api_v4_relationship_score_post"}}}, "required": true}, "responses": {"200": {"description": "Relationship score", "content": {"application/json": {"schema": {}}}}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/api/v4/synastry-chart": {"post": {"tags": ["main_router", "main_router"], "summary": "Synastry Chart", "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `timezone` - The timezone of the birth location.\n* `language` - The language of the birth chart, currently just English, Italian and Portuguese are available.\n* `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.\n    If not provided, the default settings will be used.", "operationId": "synastry_chart_api_v4_synastry_chart_post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Body_synastry_chart_api_v4_synastry_chart_post"}}}, "required": true}, "responses": {"200": {"description": "Synastry data", "content": {"application/json": {"schema": {}}}}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}, "/api/v4/transit-chart": {"post": {"tags": ["main_router", "main_router"], "summary": "Transit Chart", "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `timezone` - The timezone of the birth location.\n* `language` - The language of the birth chart, currently just English, Italian and Portuguese are available.\n* `new_settings` - Optional field. The settings for the chart, according to KerykeionSettingsModel structure of the Kerykeion library.\n    If not provided, the default settings will be used.", "operationId": "transit_chart_api_v4_transit_chart_post", "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/Body_transit_chart_api_v4_transit_chart_post"}}}, "required": true}, "responses": {"200": {"description": "Transit data", "content": {"application/json": {"schema": {}}}}, "422": {"description": "Validation Error", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/HTTPValidationError"}}}}}}}}, "components": {"schemas": {"AstrologicalSubjectModel": {"properties": {"name": {"type": "string", "title": "Name"}, "year": {"type": "integer", "title": "Year"}, "month": {"type": "integer", "title": "Month"}, "day": {"type": "integer", "title": "Day"}, "hour": {"type": "integer", "title": "Hour"}, "minute": {"type": "integer", "title": "Minute"}, "city": {"type": "string", "title": "City"}, "nation": {"type": "string", "title": "Nation"}, "lng": {"type": "number", "title": "Lng"}, "lat": {"type": "number", "title": "Lat"}, "tz_str": {"type": "string", "title": "Tz Str"}, "zodiac_type": {"type": "string", "enum": ["Tropic", "Sidereal"], "title": "Zodiac Type"}, "local_time": {"type": "number", "title": "Local Time"}, "utc_time": {"type": "number", "title": "Utc Time"}, "julian_day": {"type": "number", "title": "Julian Day"}, "sun": {"$ref": "#/components/schemas/KerykeionPointModel"}, "moon": {"$ref": "#/components/schemas/KerykeionPointModel"}, "mercury": {"$ref": "#/components/schemas/KerykeionPointModel"}, "venus": {"$ref": "#/components/schemas/KerykeionPointModel"}, "mars": {"$ref": "#/components/schemas/KerykeionPointModel"}, "jupiter": {"$ref": "#/components/schemas/KerykeionPointModel"}, "saturn": {"$ref": "#/components/schemas/KerykeionPointModel"}, "uranus": {"$ref": "#/components/schemas/KerykeionPointModel"}, "neptune": {"$ref": "#/components/schemas/KerykeionPointModel"}, "pluto": {"$ref": "#/components/schemas/KerykeionPointModel"}, "chiron": {"$ref": "#/components/schemas/KerykeionPointModel"}, "first_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "second_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "third_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "fourth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "fifth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "sixth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "seventh_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "eighth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "ninth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "tenth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "eleventh_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "twelfth_house": {"$ref": "#/components/schemas/KerykeionPointModel"}, "mean_node": {"$ref": "#/components/schemas/KerykeionPointModel"}, "true_node": {"$ref": "#/components/schemas/KerykeionPointModel"}, "lunar_phase": {"$ref": "#/components/schemas/LunarPhaseModel"}}, "type": "object", "required": ["name", "year", "month", "day", "hour", "minute", "city", "nation", "lng", "lat", "tz_str", "zodiac_type", "local_time", "utc_time", "julian_day", "sun", "moon", "mercury", "venus", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto", "chiron", "first_house", "second_house", "third_house", "fourth_house", "fifth_house", "sixth_house", "seventh_house", "eighth_house", "ninth_house", "tenth_house", "eleventh_house", "twelfth_house", "mean_node", "true_node", "lunar_phase"], "title": "AstrologicalSubjectModel"}, "BirthChartRequestModel": {"properties": {"name": {"type": "string", "title": "Name", "description": "The name of the person to get the Birth Chart for.", "default": "John Doe"}, "year": {"type": "integer", "title": "Year", "description": "The year of birth.", "default": 1980}, "month": {"type": "integer", "title": "Month", "description": "The month of birth.", "default": 12}, "day": {"type": "integer", "title": "Day", "description": "The day of birth.", "default": 12}, "hour": {"type": "integer", "title": "Hour", "description": "The hour of birth.", "default": 12}, "minute": {"type": "integer", "title": "Minute", "description": "The minute of birth.", "default": 12}, "longitude": {"type": "number", "title": "Longitude", "description": "The longitude of the birth location. Defaults on London.", "default": 0}, "latitude": {"type": "number", "title": "Latitude", "description": "The latitude of the birth location. Defaults on London.", "default": 51.4825766}, "city": {"type": "string", "title": "City", "description": "The name of city of birth.", "default": "London"}, "timezone": {"type": "string", "title": "Timezone", "description": "The timezone of the birth location.", "default": "Europe/London"}, "new_settings": {"anyOf": [{"$ref": "#/components/schemas/KerykeionSettingsModel"}, {"type": "boolean"}, {"type": "null"}], "title": "New Settings", "description": "The settings model for the Kerykeion library.", "default": false}}, "type": "object", "title": "BirthChartRequestModel", "description": "The request model for the Birth Chart endpoint."}, "BirthDataRequestModel": {"properties": {"name": {"type": "string", "title": "Name", "description": "The name of the person to get the Birth Chart for.", "default": "John Doe"}, "year": {"type": "integer", "title": "Year", "description": "The year of birth.", "default": 1980}, "month": {"type": "integer", "title": "Month", "description": "The month of birth.", "default": 12}, "day": {"type": "integer", "title": "Day", "description": "The day of birth.", "default": 12}, "hour": {"type": "integer", "title": "Hour", "description": "The hour of birth.", "default": 12}, "minute": {"type": "integer", "title": "Minute", "description": "The minute of birth.", "default": 12}, "longitude": {"type": "number", "title": "Longitude", "description": "The longitude of the birth location. Defaults on London.", "default": 0}, "latitude": {"type": "number", "title": "Latitude", "description": "The latitude of the birth location. Defaults on London.", "default": 51.4825766}, "city": {"type": "string", "title": "City", "description": "The name of city of birth.", "default": "London"}, "timezone": {"type": "string", "title": "Timezone", "description": "The timezone of the birth location.", "default": "Europe/London"}, "excluded_points": {"items": {}, "type": "array", "title": "Excluded Points", "description": "The list of points to exclude from the birth chart. Defaults to an empty list.", "default": []}, "language": {"type": "string", "title": "Language", "description": "The language of the birth chart, currently just English, Italian and Portuguese are available.", "default": "EN"}}, "type": "object", "title": "BirthDataRequestModel", "description": "The request model for the Birth Data endpoint."}, "Body_discepolo_score_api_v4_relationship_score_post": {"properties": {"first_subject": {"$ref": "#/components/schemas/BirthDataRequestModel"}, "second_subject": {"$ref": "#/components/schemas/SecondBirthChartRequestModel"}}, "type": "object", "required": ["first_subject", "second_subject"], "title": "Body_discepolo_score_api_v4_relationship_score_post"}, "Body_synastry_chart_api_v4_synastry_chart_post": {"properties": {"first_subject": {"$ref": "#/components/schemas/BirthChartRequestModel"}, "second_subject": {"$ref": "#/components/schemas/BirthChartRequestModel"}}, "type": "object", "required": ["first_subject", "second_subject"], "title": "Body_synastry_chart_api_v4_synastry_chart_post"}, "Body_transit_chart_api_v4_transit_chart_post": {"properties": {"first_subject": {"$ref": "#/components/schemas/BirthChartRequestModel"}, "second_subject": {"$ref": "#/components/schemas/TransitChartRequestModel"}}, "type": "object", "required": ["first_subject", "second_subject"], "title": "Body_transit_chart_api_v4_transit_chart_post"}, "HTTPValidationError": {"properties": {"detail": {"items": {"$ref": "#/components/schemas/ValidationError"}, "type": "array", "title": "Detail"}}, "type": "object", "title": "HTTPValidationError"}, "KerykeionChartSettingsModel": {"properties": {"basic_chart_viewBox": {"type": "string", "title": "Basic Chart ViewBox", "description": "The viewbox of the basic chart"}, "wide_chart_viewBox": {"type": "string", "title": "Wide Chart ViewBox", "description": "The viewbox of the wide chart"}}, "type": "object", "required": ["basic_chart_viewBox", "wide_chart_viewBox"], "title": "KerykeionChartSettingsModel"}, "KerykeionGeneralSettingsModel": {"properties": {"axes_orbit": {"type": "integer", "title": "Axes Orbit", "description": "The orbit of the axes in the chart"}, "planet_in_zodiac_extra_points": {"type": "integer", "title": "Planet in Zodiac Extra Points", "description": "The extra points of the planet in the zodiac"}, "language": {"type": "string", "title": "Language", "description": "The language of the chart"}}, "type": "object", "required": ["axes_orbit", "planet_in_zodiac_extra_points", "language"], "title": "KerykeionGeneralSettingsModel"}, "KerykeionLanguageCelestialPointModel": {"properties": {"Sun": {"type": "string", "title": "Sun", "description": "The name of the Sun in the chart, in the language"}, "Moon": {"type": "string", "title": "Moon", "description": "The name of the Moon in the chart, in the language"}, "Mercury": {"type": "string", "title": "Mercury", "description": "The name of Mercury in the chart, in the language"}, "Venus": {"type": "string", "title": "Venus", "description": "The name of Venus in the chart, in the language"}, "Mars": {"type": "string", "title": "Mars", "description": "The name of Mars in the chart, in the language"}, "Jupiter": {"type": "string", "title": "Jupiter", "description": "The name of Jupiter in the chart, in the language"}, "Saturn": {"type": "string", "title": "Saturn", "description": "The name of Saturn in the chart, in the language"}, "Uranus": {"type": "string", "title": "Uranus", "description": "The name of Uranus in the chart, in the language"}, "Neptune": {"type": "string", "title": "Neptune", "description": "The name of Neptune in the chart, in the language"}, "Pluto": {"type": "string", "title": "Pluto", "description": "The name of Pluto in the chart, in the language"}, "True_Node": {"type": "string", "title": "True Node", "description": "The name of True Node in the chart, in the language"}, "Mean_Node": {"type": "string", "title": "Mean Node", "description": "The name of Mean Node in the chart, in the language"}, "Chiron": {"type": "string", "title": "Chiron", "description": "The name of Chiron in the chart, in the language"}, "Asc": {"type": "string", "title": "Ascendant", "description": "The name of Ascendant in the chart, in the language"}, "Mc": {"type": "string", "title": "Medium Coeli", "description": "The name of Medium Coeli in the chart, in the language"}, "Dsc": {"type": "string", "title": "Descendant", "description": "The name of Descendant in the chart, in the language"}, "Ic": {"type": "string", "title": "Imum Coeli", "description": "The name of Imum Coeli in the chart, in the language"}}, "type": "object", "required": ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "True_Node", "Mean_Node", "Chiron", "Asc", "Mc", "Dsc", "Ic"], "title": "KerykeionLanguageCelestialPointModel", "description": "This class is used to define the labels, show in the chart, for the celestial points.\nIt is used to translate the celestial points in the language of the chart."}, "KerykeionLanguageModel": {"properties": {"info": {"type": "string", "title": "Info", "description": "The name of the Info label in the chart, in the language"}, "cusp": {"type": "string", "title": "Cusp", "description": "The name of the Cusp label in the chart, in the language"}, "longitude": {"type": "string", "title": "Longitude", "description": "The name of the Longitude label in the chart, in the language"}, "latitude": {"type": "string", "title": "Latitude", "description": "The name of the Latitude label in the chart, in the language"}, "north": {"type": "string", "title": "North", "description": "The name of the North label in the chart, in the language"}, "east": {"type": "string", "title": "East", "description": "The name of the East label in the chart, in the language"}, "south": {"type": "string", "title": "South", "description": "The name of the South label in the chart, in the language"}, "west": {"type": "string", "title": "West", "description": "The name of the West label in the chart, in the language"}, "fire": {"type": "string", "title": "Fire", "description": "The name of the Fire label in the chart, in the language"}, "earth": {"type": "string", "title": "Earth", "description": "The name of the Earth label in the chart, in the language"}, "air": {"type": "string", "title": "Air", "description": "The name of the Air label in the chart, in the language"}, "water": {"type": "string", "title": "Water", "description": "The name of the Water label in the chart, in the language"}, "and_word": {"type": "string", "title": "And", "description": "The name of the And word in the chart, in the language"}, "transits": {"type": "string", "title": "Transits", "description": "The name of the Transits label in the chart, in the language"}, "type": {"type": "string", "title": "Type", "description": "The name of the Type label in the chart, in the language"}, "aspects": {"type": "string", "title": "Aspects", "description": "The name of the Aspects label in the chart, in the language"}, "planets_and_house": {"type": "string", "title": "Planets and Houses", "description": "The name of the Planets and Houses label in the chart, in the language"}, "transit_name": {"type": "string", "title": "Transit Name", "description": "The name of the Transit Name label in the chart, in the language"}, "lunar_phase": {"type": "string", "title": "Lunar Phase", "description": "The name of the Lunar Phase label in the chart, in the language"}, "day": {"type": "string", "title": "Day", "description": "The name of the Day label in the chart, in the language"}, "celestial_points": {"$ref": "#/components/schemas/KerykeionLanguageCelestialPointModel"}}, "type": "object", "required": ["info", "cusp", "longitude", "latitude", "north", "east", "south", "west", "fire", "earth", "air", "water", "and_word", "transits", "type", "aspects", "planets_and_house", "transit_name", "lunar_phase", "day", "celestial_points"], "title": "KerykeionLanguageModel", "description": "This model is used to store the language settings for the chart,\nit's used to translate the celestial points and the other labels"}, "KerykeionPointModel": {"properties": {"name": {"anyOf": [{"type": "string", "enum": ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto", "Mean_Node", "True_Node", "Chiron"]}, {"type": "string", "enum": ["First_House", "Second_House", "Third_House", "Fourth_House", "Fifth_House", "Sixth_House", "Seventh_House", "Eighth_House", "Ninth_House", "Tenth_House", "Eleventh_House", "Twelfth_House"]}], "title": "Name"}, "quality": {"type": "string", "enum": ["Cardinal", "Fixed", "Mutable"], "title": "Quality"}, "element": {"type": "string", "enum": ["Air", "Fire", "Earth", "Water"], "title": "Element"}, "sign": {"type": "string", "enum": ["Ari", "Tau", "Gem", "Can", "Leo", "Vir", "Lib", "Sco", "Sag", "Cap", "Aqu", "Pis"], "title": "Sign"}, "sign_num": {"type": "integer", "enum": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "title": "Sign Num"}, "position": {"type": "number", "title": "Position"}, "abs_pos": {"type": "number", "title": "Abs Pos"}, "emoji": {"type": "string", "title": "Emoji"}, "point_type": {"type": "string", "enum": ["Planet", "House"], "title": "Point Type"}, "house": {"anyOf": [{"type": "integer", "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}, {"type": "null"}], "title": "House"}, "retrograde": {"anyOf": [{"type": "boolean"}, {"type": "null"}], "title": "Retrograde"}}, "type": "object", "required": ["name", "quality", "element", "sign", "sign_num", "position", "abs_pos", "emoji", "point_type"], "title": "KerykeionPointModel", "description": "Kerykeion Point Model"}, "KerykeionSettingsAspectModel": {"properties": {"degree": {"type": "integer", "title": "Aspect Degrees", "description": "The degree of the aspect"}, "name": {"type": "string", "title": "Aspect Name", "description": "The name of the aspect"}, "is_active": {"type": "boolean", "title": "Aspect is Active", "description": "Is the aspect active?"}, "visible_grid": {"type": "boolean", "title": "Aspect Visible Grid", "description": "Is the aspect visible in the grid?"}, "is_major": {"type": "boolean", "title": "Aspect is Major", "description": "Is the aspect major?"}, "is_minor": {"type": "boolean", "title": "Aspect is Minor", "description": "Is the aspect minor?"}, "orb": {"type": "integer", "title": "Aspect Orb", "description": "The orb of the aspect"}, "color": {"type": "string", "title": "Aspect Color", "description": "The color of the aspect"}}, "type": "object", "required": ["degree", "name", "is_active", "visible_grid", "is_major", "is_minor", "orb", "color"], "title": "KerykeionSettingsAspectModel", "description": "Defines the model for an aspect."}, "KerykeionSettingsCelestialPointModel": {"properties": {"id": {"type": "integer", "title": "Celestial Point ID", "description": "Celestial Point ID according to Pyswisseph"}, "name": {"type": "string", "title": "Celestial Point Name", "description": "Celestial Point Name"}, "color": {"type": "string", "title": "Celestial Point Color", "description": "Celestial Point Color, used in the chart"}, "is_active": {"type": "boolean", "title": "Celestial Point is Active", "description": "Indicates if the celestial point is active in the chart"}, "element_points": {"type": "integer", "title": "Celestial Point Element Points", "description": "Element Points given to the celestial point"}, "related_zodiac_signs": {"items": {"type": "integer"}, "type": "array", "title": "Celestial Point Related Zodiac Signs", "description": "Zodiac Signs related to the celestial point"}, "label": {"type": "string", "title": "Celestial Point Label", "description": "The name of the celestial point in the chart, it can be different from the name"}}, "type": "object", "required": ["id", "name", "color", "is_active", "element_points", "related_zodiac_signs", "label"], "title": "KerykeionSettingsCelestialPointModel", "description": "Defines the model for a celestial point data."}, "KerykeionSettingsChartColorsModel": {"properties": {"paper_0": {"type": "string", "title": "Paper Color 0", "description": "Paper Color 0"}, "paper_1": {"type": "string", "title": "Paper Color 1", "description": "Paper Color 1"}, "zodiac_bg_0": {"type": "string", "title": "Zodiac Background Color 0", "description": "Zodiac Background Color 0"}, "zodiac_bg_1": {"type": "string", "title": "Zodiac Background Color 1", "description": "Zodiac Background Color 1"}, "zodiac_bg_2": {"type": "string", "title": "Zodiac Background Color 2", "description": "Zodiac Background Color 2"}, "zodiac_bg_3": {"type": "string", "title": "Zodiac Background Color 3", "description": "Zodiac Background Color 3"}, "zodiac_bg_4": {"type": "string", "title": "Zodiac Background Color 4", "description": "Zodiac Background Color 4"}, "zodiac_bg_5": {"type": "string", "title": "Zodiac Background Color 5", "description": "Zodiac Background Color 5"}, "zodiac_bg_6": {"type": "string", "title": "Zodiac Background Color 6", "description": "Zodiac Background Color 6"}, "zodiac_bg_7": {"type": "string", "title": "Zodiac Background Color 7", "description": "Zodiac Background Color 7"}, "zodiac_bg_8": {"type": "string", "title": "Zodiac Background Color 8", "description": "Zodiac Background Color 8"}, "zodiac_bg_9": {"type": "string", "title": "Zodiac Background Color 9", "description": "Zodiac Background Color 9"}, "zodiac_bg_10": {"type": "string", "title": "Zodiac Background Color 10", "description": "Zodiac Background Color 10"}, "zodiac_bg_11": {"type": "string", "title": "Zodiac Background Color 11", "description": "Zodiac Background Color 11"}, "zodiac_icon_0": {"type": "string", "title": "Zodiac Icon Color 0", "description": "Zodiac Icon Color 0"}, "zodiac_icon_1": {"type": "string", "title": "Zodiac Icon Color 1", "description": "Zodiac Icon Color 1"}, "zodiac_icon_2": {"type": "string", "title": "Zodiac Icon Color 2", "description": "Zodiac Icon Color 2"}, "zodiac_icon_3": {"type": "string", "title": "Zodiac Icon Color 3", "description": "Zodiac Icon Color 3"}, "zodiac_icon_4": {"type": "string", "title": "Zodiac Icon Color 4", "description": "Zodiac Icon Color 4"}, "zodiac_icon_5": {"type": "string", "title": "Zodiac Icon Color 5", "description": "Zodiac Icon Color 5"}, "zodiac_icon_6": {"type": "string", "title": "Zodiac Icon Color 6", "description": "Zodiac Icon Color 6"}, "zodiac_icon_7": {"type": "string", "title": "Zodiac Icon Color 7", "description": "Zodiac Icon Color 7"}, "zodiac_icon_8": {"type": "string", "title": "Zodiac Icon Color 8", "description": "Zodiac Icon Color 8"}, "zodiac_icon_9": {"type": "string", "title": "Zodiac Icon Color 9", "description": "Zodiac Icon Color 9"}, "zodiac_icon_10": {"type": "string", "title": "Zodiac Icon Color 10", "description": "Zodiac Icon Color 10"}, "zodiac_icon_11": {"type": "string", "title": "Zodiac Icon Color 11", "description": "Zodiac Icon Color 11"}, "zodiac_radix_ring_0": {"type": "string", "title": "Zodiac Radix Ring Color 0", "description": "Zodiac Radix Ring Color 0"}, "zodiac_radix_ring_1": {"type": "string", "title": "Zodiac Radix Ring Color 1", "description": "Zodiac Radix Ring Color 1"}, "zodiac_radix_ring_2": {"type": "string", "title": "Zodiac Radix Ring Color 2", "description": "Zodiac Radix Ring Color 2"}, "zodiac_transit_ring_0": {"type": "string", "title": "Zodiac Transit Ring Color 0", "description": "Zodiac Transit Ring Color 0"}, "zodiac_transit_ring_1": {"type": "string", "title": "Zodiac Transit Ring Color 1", "description": "Zodiac Transit Ring Color 1"}, "zodiac_transit_ring_2": {"type": "string", "title": "Zodiac Transit Ring Color 2", "description": "Zodiac Transit Ring Color 2"}, "zodiac_transit_ring_3": {"type": "string", "title": "Zodiac Transit Ring Color 3", "description": "Zodiac Transit Ring Color 3"}, "houses_radix_line": {"type": "string", "title": "Houses Radix Line Color", "description": "Houses Radix Line Color"}, "houses_transit_line": {"type": "string", "title": "Houses Transit Line Color", "description": "Houses Transit Line Color"}, "lunar_phase_0": {"type": "string", "title": "Lunar Phase Color 0", "description": "Lunar Phase Color 0"}, "lunar_phase_1": {"type": "string", "title": "Lunar Phase Color 1", "description": "Lunar Phase Color 1"}, "lunar_phase_2": {"type": "string", "title": "Lunar Phase Color 2", "description": "Lunar Phase Color 2"}}, "type": "object", "required": ["paper_0", "paper_1", "zodiac_bg_0", "zodiac_bg_1", "zodiac_bg_2", "zodiac_bg_3", "zodiac_bg_4", "zodiac_bg_5", "zodiac_bg_6", "zodiac_bg_7", "zodiac_bg_8", "zodiac_bg_9", "zodiac_bg_10", "zodiac_bg_11", "zodiac_icon_0", "zodiac_icon_1", "zodiac_icon_2", "zodiac_icon_3", "zodiac_icon_4", "zodiac_icon_5", "zodiac_icon_6", "zodiac_icon_7", "zodiac_icon_8", "zodiac_icon_9", "zodiac_icon_10", "zodiac_icon_11", "zodiac_radix_ring_0", "zodiac_radix_ring_1", "zodiac_radix_ring_2", "zodiac_transit_ring_0", "zodiac_transit_ring_1", "zodiac_transit_ring_2", "zodiac_transit_ring_3", "houses_radix_line", "houses_transit_line", "lunar_phase_0", "lunar_phase_1", "lunar_phase_2"], "title": "KerykeionSettingsChartColorsModel", "description": "Defines the model for the chart colors."}, "KerykeionSettingsModel": {"properties": {"chart_colors": {"allOf": [{"$ref": "#/components/schemas/KerykeionSettingsChartColorsModel"}], "title": "Chart Colors", "description": "The colors of the chart"}, "celestial_points": {"items": {"$ref": "#/components/schemas/KerykeionSettingsCelestialPointModel"}, "type": "array", "title": "Celestial Points", "description": "The list of the celestial points of the chart"}, "aspects": {"items": {"$ref": "#/components/schemas/KerykeionSettingsAspectModel"}, "type": "array", "title": "Aspects", "description": "The list of the aspects of the chart"}, "language_settings": {"additionalProperties": {"$ref": "#/components/schemas/KerykeionLanguageModel"}, "type": "object", "title": "Language Settings", "description": "The language settings of the chart"}, "general_settings": {"allOf": [{"$ref": "#/components/schemas/KerykeionGeneralSettingsModel"}], "title": "General Settings", "description": "The general settings of the chart"}, "chart_settings": {"allOf": [{"$ref": "#/components/schemas/KerykeionChartSettingsModel"}], "title": "Chart Settings", "description": "The chart settings of the chart"}}, "type": "object", "required": ["chart_colors", "celestial_points", "aspects", "language_settings", "general_settings", "chart_settings"], "title": "KerykeionSettingsModel", "description": "This class is used to define the global settings for the Kerykeion."}, "LunarPhaseModel": {"properties": {"degrees_between_s_m": {"anyOf": [{"type": "number"}, {"type": "integer"}], "title": "Degrees Between S M"}, "moon_phase": {"type": "integer", "title": "Moon Phase"}, "sun_phase": {"type": "integer", "title": "Sun Phase"}, "moon_emoji": {"type": "string", "enum": ["\ud83c\udf11", "\ud83c\udf12", "\ud83c\udf13", "\ud83c\udf14", "\ud83c\udf15", "\ud83c\udf16", "\ud83c\udf17", "\ud83c\udf18"], "title": "Moon Emoji"}}, "type": "object", "required": ["degrees_between_s_m", "moon_phase", "sun_phase", "moon_emoji"], "title": "LunarPhaseModel"}, "SecondBirthChartRequestModel": {"properties": {"name": {"type": "string", "title": "Name", "description": "The name of the person to get the Birth Chart for.", "default": "John Doe"}, "year": {"type": "integer", "title": "Year", "description": "The year of birth.", "default": 1980}, "month": {"type": "integer", "title": "Month", "description": "The month of birth.", "default": 12}, "day": {"type": "integer", "title": "Day", "description": "The day of birth.", "default": 12}, "hour": {"type": "integer", "title": "Hour", "description": "The hour of birth.", "default": 12}, "minute": {"type": "integer", "title": "Minute", "description": "The minute of birth.", "default": 12}, "longitude": {"type": "number", "title": "Longitude", "description": "The longitude of the birth location. Defaults on London.", "default": 0}, "latitude": {"type": "number", "title": "Latitude", "description": "The latitude of the birth location. Defaults on London.", "default": 51.4825766}, "city": {"type": "string", "title": "City", "description": "The name of city of birth.", "default": "London"}, "timezone": {"type": "string", "title": "Timezone", "description": "The timezone of the birth location.", "default": "Europe/London"}}, "type": "object", "title": "SecondBirthChartRequestModel", "description": "The request model for the Birth Chart endpoint, without the new_settings field."}, "TransitChartRequestModel": {"properties": {"year": {"type": "integer", "title": "Year", "description": "The year of birth.", "default": 1980}, "month": {"type": "integer", "title": "Month", "description": "The month of birth.", "default": 12}, "day": {"type": "integer", "title": "Day", "description": "The day of birth.", "default": 12}, "hour": {"anyOf": [{"type": "integer"}, {"type": "null"}], "title": "Hour", "description": "The hour of birth.", "default": 12}, "minute": {"anyOf": [{"type": "integer"}, {"type": "null"}], "title": "Minute", "description": "The minute of birth.", "default": 12}, "longitude": {"anyOf": [{"type": "number"}, {"type": "null"}], "title": "Longitude", "description": "The longitude of the birth location. Defaults on London.", "default": 0}, "latitude": {"anyOf": [{"type": "number"}, {"type": "null"}], "title": "Latitude", "description": "The latitude of the birth location. Defaults on London.", "default": 51.4825766}, "city": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "City", "description": "The name of city of birth.", "default": "London"}, "timezone": {"anyOf": [{"type": "string"}, {"type": "null"}], "title": "Timezone", "description": "The timezone of the birth location.", "default": "Europe/London"}}, "type": "object", "title": "TransitChartRequestModel", "description": "The request model for the Birth Chart endpoint, without the new_settings field."}, "ValidationError": {"properties": {"loc": {"items": {"anyOf": [{"type": "string"}, {"type": "integer"}]}, "type": "array", "title": "Location"}, "msg": {"type": "string", "title": "Message"}, "type": {"type": "string", "title": "Error Type"}}, "type": "object", "required": ["loc", "msg", "type"], "title": "ValidationError"}}}}
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Astrologer API",
+    "description": "An API for astrological calculations.",
+    "version": "4.0.0"
+  },
+  "paths": {
+    "/api/v4/now": {
+      "get": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Get Now",
+        "description": "Returns the current astrological data in JSON format.\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subject.",
+        "operationId": "get_now_api_v4_now_get",
+        "responses": {
+          "200": {
+            "description": "Current astrological data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BirthDataResponseModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/birth-data": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Birth Data",
+        "description": "Returns the Birth data in JSON format.\n\n* `name` - The name of the person to get the Birth Chart for.\n* `year` - The year of birth.\n* `month` - The month of birth.\n* `day` - The day of birth.\n* `hour` - The hour of birth.\n* `minute` - The minute of birth.\n* `latitude` - The latitude of the birth location.\n* `longitude` - The longitude of the birth location.\n* `city` - The name of city of birth.\n* `nation` - The nation of the birth location.\n* `timezone` - The timezone of the birth location.\n* `zodiac_type` - The type of zodiac used (Tropic or Sidereal).",
+        "operationId": "birth_data_api_v4_birth_data_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BirthDataRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Birth data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BirthDataResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/birth-chart": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Birth Chart",
+        "description": "Returns the Birth data in JSON format.\n\nRequest model:\n* `subject` - The first astrological subject.\n    * `name` - The name of the person to get the Birth Chart for.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `theme` - Optional field. The theme for the chart. The default theme is \"classic\".\n    Available themes are:\n    - \"classic\"\n    - \"dark\"\n    - \"dark-high-contrast\"\n    - \"light\"\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subject.",
+        "operationId": "birth_chart_api_v4_birth_chart_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BirthChartRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Birth chart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BirthChartResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/synastry-chart": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Synastry Chart",
+        "description": "Returns the Synastry data in JSON format.\n\nRequest model:\n* `first_subject` - The first astrological subject.\n    * `name` - The name of the first subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `timezone` - The timezone of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `second_subject` - The second astrological subject.\n    * `name` - The name of the second subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `theme` - Optional field. The theme for the chart. The default theme is \"classic\".\n    Available themes are:\n    - \"classic\"\n    - \"dark\"\n    - \"dark-high-contrast\"\n    - \"light\"\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subjects.\n* `chart` - The SVG representation of the chart.\n* `aspects` - The list of aspects between the two subjects.",
+        "operationId": "synastry_chart_api_v4_synastry_chart_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynastryChartRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Synastry data",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/transit-chart": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Transit Chart",
+        "description": "Returns the Birth data in JSON format.\n\nRequest model:\n* `first_subject` - The first astrological subject.\n    * `name` - The name of the person to get the Birth Chart for.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `second_subject` - The second astrological subject.\n    * `year` - The year of transit.\n    * `month` - The month of transit.\n    * `day` - The day of transit.\n    * `hour` - The hour of transit.\n    * `minute` - The minute of transit.\n    * `latitude` - The latitude of the transit location.\n    * `longitude` - The longitude of the transit location.\n    * `city` - The name of city of transit.\n    * `nation` - The nation of the transit location.\n    * `timezone` - The timezone of the transit location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `theme` - Optional field. The theme for the chart. The default theme is \"classic\".\n    Available themes are:\n    - \"classic\"\n    - \"dark\"\n    - \"dark-high-contrast\"\n    - \"light\"\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the astrological subjects.\n* `chart` - The SVG representation of the chart.\n* `aspects` - The list of aspects between the two subjects.",
+        "operationId": "transit_chart_api_v4_transit_chart_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitChartRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Transit data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynastryChartResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/synastry-aspects-data": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Synastry Aspects Data",
+        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.\n\nRequest model:\n* `first_subject` - The first astrological subject.\n    * `name` - The name of the first subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\n* `second_subject` - The second astrological subject.\n    * `name` - The name of the second subject.\n    * `year` - The year of birth.\n    * `month` - The month of birth.\n    * `day` - The day of birth.\n    * `hour` - The hour of birth.\n    * `minute` - The minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the two subjects.\n* `aspects` - The aspects between the two subjects.",
+        "operationId": "synastry_aspects_data_api_v4_synastry_aspects_data_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynastryAspectsRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Synastry aspects data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynastryAspectsResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/natal-aspects-data": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Natal Aspects Data",
+        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.\n\nRequest model:\n* `subject` - The astrological subject.\n    * `name` - The name of the person to get the aspects for.\n    * `year` - Year of birth.\n    * `month` - Month of birth.\n    * `day` - Day of birth.\n    * `hour` - Hour of birth.\n    * `minute` - Minute of birth.\n    * `latitude` - The latitude of the birth location.\n    * `longitude` - The longitude of the birth location.\n    * `city` - The name of city of birth.\n    * `nation` - The nation of the birth location.\n    * `timezone` - The timezone of the birth location.\n    * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).\n\nResponse model:\n* `status` - The status of the request.\n* `data` - The data of the two subjects.\n* `aspects` - The aspects between the two subjects.",
+        "operationId": "natal_aspects_data_api_v4_natal_aspects_data_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NatalAspectsRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Birth aspects data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SynastryAspectsResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v4/relationship-score": {
+      "post": {
+        "tags": [
+          "main_router",
+          "main_router"
+        ],
+        "summary": "Relationship Score",
+        "description": "Get compatibility score number according to Ciro Discepolo method.",
+        "operationId": "relationship_score_api_v4_relationship_score_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RelationshipScoreRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Relationship score",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RelationshipScoreResponseModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RapidAPIKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-rapidapi-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "<YOUR_RAPIDAPI_KEY>"
+            }
+          },
+          {
+            "name": "x-rapidapi-host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "astrologer.p.rapidapi.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AspectModel": {
+        "properties": {
+          "p1_name": {
+            "type": "string",
+            "title": "P1 Name",
+            "description": "The name of the first planet."
+          },
+          "p1_abs_pos": {
+            "type": "number",
+            "title": "P1 Abs Pos",
+            "description": "The absolute position of the first planet."
+          },
+          "p2_name": {
+            "type": "string",
+            "title": "P2 Name",
+            "description": "The name of the second planet."
+          },
+          "p2_abs_pos": {
+            "type": "number",
+            "title": "P2 Abs Pos",
+            "description": "The absolute position of the second planet."
+          },
+          "aspect": {
+            "type": "string",
+            "title": "Aspect",
+            "description": "The aspect between the two planets."
+          },
+          "orbit": {
+            "type": "number",
+            "title": "Orbit",
+            "description": "The orbit between the two planets."
+          },
+          "aspect_degrees": {
+            "type": "number",
+            "title": "Aspect Degrees",
+            "description": "The degrees of the aspect."
+          },
+          "aid": {
+            "type": "integer",
+            "title": "Aid",
+            "description": "The aspect id."
+          },
+          "diff": {
+            "type": "number",
+            "title": "Diff",
+            "description": "The difference between the two planets."
+          },
+          "p1": {
+            "type": "integer",
+            "title": "P1",
+            "description": "The id of the first planet."
+          },
+          "p2": {
+            "type": "integer",
+            "title": "P2",
+            "description": "The id of the second planet."
+          }
+        },
+        "type": "object",
+        "required": [
+          "p1_name",
+          "p1_abs_pos",
+          "p2_name",
+          "p2_abs_pos",
+          "aspect",
+          "orbit",
+          "aspect_degrees",
+          "aid",
+          "diff",
+          "p1",
+          "p2"
+        ],
+        "title": "AspectModel"
+      },
+      "AstrologicalSubjectModel": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "month": {
+            "type": "integer",
+            "title": "Month"
+          },
+          "day": {
+            "type": "integer",
+            "title": "Day"
+          },
+          "hour": {
+            "type": "integer",
+            "title": "Hour"
+          },
+          "minute": {
+            "type": "integer",
+            "title": "Minute"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "nation": {
+            "type": "string",
+            "title": "Nation"
+          },
+          "lng": {
+            "type": "number",
+            "title": "Lng"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "tz_str": {
+            "type": "string",
+            "title": "Tz Str"
+          },
+          "zodiac_type": {
+            "type": "string",
+            "enum": [
+              "Tropic",
+              "Sidereal"
+            ],
+            "title": "Zodiac Type"
+          },
+          "sidereal_mode": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "FAGAN_BRADLEY",
+                  "LAHIRI",
+                  "DELUCE",
+                  "RAMAN",
+                  "USHASHASHI",
+                  "KRISHNAMURTI",
+                  "DJWHAL_KHUL",
+                  "YUKTESHWAR",
+                  "JN_BHASIN",
+                  "BABYL_KUGLER1",
+                  "BABYL_KUGLER2",
+                  "BABYL_KUGLER3",
+                  "BABYL_HUBER",
+                  "BABYL_ETPSC",
+                  "ALDEBARAN_15TAU",
+                  "HIPPARCHOS",
+                  "SASSANIAN",
+                  "J2000",
+                  "J1900",
+                  "B1950"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sidereal Mode"
+          },
+          "houses_system_identifier": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "F",
+              "H",
+              "I",
+              "i",
+              "K",
+              "L",
+              "M",
+              "N",
+              "O",
+              "P",
+              "Q",
+              "R",
+              "S",
+              "T",
+              "U",
+              "V",
+              "W",
+              "X",
+              "Y"
+            ],
+            "title": "Houses System Identifier"
+          },
+          "houses_system_name": {
+            "type": "string",
+            "title": "Houses System Name"
+          },
+          "perspective_type": {
+            "type": "string",
+            "title": "Perspective Type"
+          },
+          "iso_formatted_local_datetime": {
+            "type": "string",
+            "title": "Iso Formatted Local Datetime"
+          },
+          "iso_formatted_utc_datetime": {
+            "type": "string",
+            "title": "Iso Formatted Utc Datetime"
+          },
+          "julian_day": {
+            "type": "number",
+            "title": "Julian Day"
+          },
+          "utc_time": {
+            "type": "number",
+            "title": "Utc Time"
+          },
+          "local_time": {
+            "type": "number",
+            "title": "Local Time"
+          },
+          "sun": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "moon": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "mercury": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "venus": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "mars": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "jupiter": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "saturn": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "uranus": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "neptune": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "pluto": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "chiron": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KerykeionPointModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mean_lilith": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KerykeionPointModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "first_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "second_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "third_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "fourth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "fifth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "sixth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "seventh_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "eighth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "ninth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "tenth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "eleventh_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "twelfth_house": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "mean_node": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "true_node": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "lunar_phase": {
+            "$ref": "#/components/schemas/LunarPhaseModel"
+          },
+          "planets_names_list": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Mean_Node",
+                "True_Node",
+                "Chiron",
+                "Mean_Lilith"
+              ]
+            },
+            "type": "array",
+            "title": "Planets Names List"
+          },
+          "houses_names_list": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "First_House",
+                "Second_House",
+                "Third_House",
+                "Fourth_House",
+                "Fifth_House",
+                "Sixth_House",
+                "Seventh_House",
+                "Eighth_House",
+                "Ninth_House",
+                "Tenth_House",
+                "Eleventh_House",
+                "Twelfth_House"
+              ]
+            },
+            "type": "array",
+            "title": "Houses Names List"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "city",
+          "nation",
+          "lng",
+          "lat",
+          "tz_str",
+          "zodiac_type",
+          "sidereal_mode",
+          "houses_system_identifier",
+          "houses_system_name",
+          "perspective_type",
+          "iso_formatted_local_datetime",
+          "iso_formatted_utc_datetime",
+          "julian_day",
+          "utc_time",
+          "local_time",
+          "sun",
+          "moon",
+          "mercury",
+          "venus",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "pluto",
+          "chiron",
+          "mean_lilith",
+          "first_house",
+          "second_house",
+          "third_house",
+          "fourth_house",
+          "fifth_house",
+          "sixth_house",
+          "seventh_house",
+          "eighth_house",
+          "ninth_house",
+          "tenth_house",
+          "eleventh_house",
+          "twelfth_house",
+          "mean_node",
+          "true_node",
+          "lunar_phase",
+          "planets_names_list",
+          "houses_names_list"
+        ],
+        "title": "AstrologicalSubjectModel"
+      },
+      "BirthChartRequestModel": {
+        "properties": {
+          "subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "theme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "light",
+                  "dark",
+                  "dark-high-contrast",
+                  "classic"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Theme",
+            "description": "The theme of the chart.",
+            "default": "classic",
+            "examples": [
+              "classic",
+              "light",
+              "dark",
+              "dark-high-contrast"
+            ]
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EN",
+                  "FR",
+                  "PT",
+                  "IT",
+                  "CN",
+                  "ES",
+                  "RU",
+                  "TR",
+                  "DE",
+                  "HI"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language",
+            "description": "The language of the chart.",
+            "default": "EN",
+            "examples": [
+              "EN",
+              "FR",
+              "PT",
+              "IT",
+              "CN",
+              "ES",
+              "RU",
+              "TR",
+              "DE",
+              "HI"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "BirthChartRequestModel",
+        "description": "The request model for the Birth Chart endpoint."
+      },
+      "BirthChartResponseModel": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "The status of the response."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BirthDataModel"
+              }
+            ],
+            "description": "The data of the subject."
+          },
+          "chart": {
+            "type": "string",
+            "title": "Chart",
+            "description": "The SVG chart of the birth chart."
+          },
+          "aspects": {
+            "items": {
+              "$ref": "#/components/schemas/AspectModel"
+            },
+            "type": "array",
+            "title": "Aspects",
+            "description": "The aspects of the birth chart."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data",
+          "chart",
+          "aspects"
+        ],
+        "title": "BirthChartResponseModel"
+      },
+      "BirthDataModel": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the subject."
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year",
+            "description": "Year of birth."
+          },
+          "month": {
+            "type": "integer",
+            "title": "Month",
+            "description": "Month of birth."
+          },
+          "day": {
+            "type": "integer",
+            "title": "Day",
+            "description": "Day of birth."
+          },
+          "hour": {
+            "type": "integer",
+            "title": "Hour",
+            "description": "Hour of birth."
+          },
+          "minute": {
+            "type": "integer",
+            "title": "Minute",
+            "description": "Minute of birth."
+          },
+          "city": {
+            "type": "string",
+            "title": "City",
+            "description": "City of birth."
+          },
+          "nation": {
+            "type": "string",
+            "title": "Nation",
+            "description": "Nation of birth."
+          },
+          "lng": {
+            "type": "number",
+            "title": "Lng",
+            "description": "Longitude of birth."
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat",
+            "description": "Latitude of birth."
+          },
+          "tz_str": {
+            "type": "string",
+            "title": "Tz Str",
+            "description": "Timezone of birth."
+          },
+          "zodiac_type": {
+            "type": "string",
+            "title": "Zodiac Type",
+            "description": "The type of zodiac used."
+          },
+          "local_time": {
+            "type": "string",
+            "title": "Local Time",
+            "description": "The local time of birth."
+          },
+          "utc_time": {
+            "type": "string",
+            "title": "Utc Time",
+            "description": "The UTC time of birth."
+          },
+          "julian_day": {
+            "type": "number",
+            "title": "Julian Day",
+            "description": "The Julian day of birth."
+          },
+          "sun": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the Sun."
+          },
+          "moon": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the Moon."
+          },
+          "mercury": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Mercury."
+          },
+          "venus": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Venus."
+          },
+          "mars": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Mars."
+          },
+          "jupiter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Jupiter."
+          },
+          "saturn": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Saturn."
+          },
+          "uranus": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Uranus."
+          },
+          "neptune": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Neptune."
+          },
+          "pluto": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Pluto."
+          },
+          "chiron": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of Chiron."
+          },
+          "first_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the first house."
+          },
+          "second_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the second house."
+          },
+          "third_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the third house."
+          },
+          "fourth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the fourth house."
+          },
+          "fifth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the fifth house."
+          },
+          "sixth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the sixth house."
+          },
+          "seventh_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the seventh house."
+          },
+          "eighth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the eighth house."
+          },
+          "ninth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the ninth house."
+          },
+          "tenth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the tenth house."
+          },
+          "eleventh_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the eleventh house."
+          },
+          "twelfth_house": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the twelfth house."
+          },
+          "mean_node": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the mean node."
+          },
+          "true_node": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PlanetModel"
+              }
+            ],
+            "description": "The data of the true node."
+          },
+          "lunar_phase": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LunarPhaseModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "city",
+          "nation",
+          "lng",
+          "lat",
+          "tz_str",
+          "zodiac_type",
+          "local_time",
+          "utc_time",
+          "julian_day",
+          "sun",
+          "moon",
+          "mercury",
+          "venus",
+          "mars",
+          "jupiter",
+          "saturn",
+          "uranus",
+          "neptune",
+          "pluto",
+          "chiron",
+          "first_house",
+          "second_house",
+          "third_house",
+          "fourth_house",
+          "fifth_house",
+          "sixth_house",
+          "seventh_house",
+          "eighth_house",
+          "ninth_house",
+          "tenth_house",
+          "eleventh_house",
+          "twelfth_house",
+          "mean_node",
+          "true_node",
+          "lunar_phase"
+        ],
+        "title": "BirthDataModel"
+      },
+      "BirthDataRequestModel": {
+        "properties": {
+          "subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "BirthDataRequestModel",
+        "description": "The request model for the Birth Data endpoint."
+      },
+      "BirthDataResponseModel": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "The status of the response."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BirthDataModel"
+              }
+            ],
+            "description": "The data of the subject."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "BirthDataResponseModel"
+      },
+      "DoubleDataModel": {
+        "properties": {
+          "first_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AstrologicalSubjectModel"
+              }
+            ],
+            "description": "The data of the first subject."
+          },
+          "second_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AstrologicalSubjectModel"
+              }
+            ],
+            "description": "The data of the second subject."
+          }
+        },
+        "type": "object",
+        "required": [
+          "first_subject",
+          "second_subject"
+        ],
+        "title": "DoubleDataModel"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "KerykeionPointModel": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Sun",
+                  "Moon",
+                  "Mercury",
+                  "Venus",
+                  "Mars",
+                  "Jupiter",
+                  "Saturn",
+                  "Uranus",
+                  "Neptune",
+                  "Pluto",
+                  "Mean_Node",
+                  "True_Node",
+                  "Chiron",
+                  "Mean_Lilith"
+                ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "First_House",
+                  "Second_House",
+                  "Third_House",
+                  "Fourth_House",
+                  "Fifth_House",
+                  "Sixth_House",
+                  "Seventh_House",
+                  "Eighth_House",
+                  "Ninth_House",
+                  "Tenth_House",
+                  "Eleventh_House",
+                  "Twelfth_House"
+                ]
+              }
+            ],
+            "title": "Name"
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "Cardinal",
+              "Fixed",
+              "Mutable"
+            ],
+            "title": "Quality"
+          },
+          "element": {
+            "type": "string",
+            "enum": [
+              "Air",
+              "Fire",
+              "Earth",
+              "Water"
+            ],
+            "title": "Element"
+          },
+          "sign": {
+            "type": "string",
+            "enum": [
+              "Ari",
+              "Tau",
+              "Gem",
+              "Can",
+              "Leo",
+              "Vir",
+              "Lib",
+              "Sco",
+              "Sag",
+              "Cap",
+              "Aqu",
+              "Pis"
+            ],
+            "title": "Sign"
+          },
+          "sign_num": {
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ],
+            "title": "Sign Num"
+          },
+          "position": {
+            "type": "number",
+            "title": "Position"
+          },
+          "abs_pos": {
+            "type": "number",
+            "title": "Abs Pos"
+          },
+          "emoji": {
+            "type": "string",
+            "title": "Emoji"
+          },
+          "point_type": {
+            "type": "string",
+            "enum": [
+              "Planet",
+              "House"
+            ],
+            "title": "Point Type"
+          },
+          "house": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "First_House",
+                  "Second_House",
+                  "Third_House",
+                  "Fourth_House",
+                  "Fifth_House",
+                  "Sixth_House",
+                  "Seventh_House",
+                  "Eighth_House",
+                  "Ninth_House",
+                  "Tenth_House",
+                  "Eleventh_House",
+                  "Twelfth_House"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "House"
+          },
+          "retrograde": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrograde"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "quality",
+          "element",
+          "sign",
+          "sign_num",
+          "position",
+          "abs_pos",
+          "emoji",
+          "point_type"
+        ],
+        "title": "KerykeionPointModel",
+        "description": "Kerykeion Point Model"
+      },
+      "LunarPhaseModel": {
+        "properties": {
+          "degrees_between_s_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Degrees Between S M"
+          },
+          "moon_phase": {
+            "type": "integer",
+            "title": "Moon Phase"
+          },
+          "sun_phase": {
+            "type": "integer",
+            "title": "Sun Phase"
+          },
+          "moon_emoji": {
+            "type": "string",
+            "enum": [
+              "\ud83c\udf11",
+              "\ud83c\udf12",
+              "\ud83c\udf13",
+              "\ud83c\udf14",
+              "\ud83c\udf15",
+              "\ud83c\udf16",
+              "\ud83c\udf17",
+              "\ud83c\udf18"
+            ],
+            "title": "Moon Emoji"
+          },
+          "moon_phase_name": {
+            "type": "string",
+            "enum": [
+              "New Moon",
+              "Waxing Crescent",
+              "First Quarter",
+              "Waxing Gibbous",
+              "Full Moon",
+              "Waning Gibbous",
+              "Last Quarter",
+              "Waning Crescent"
+            ],
+            "title": "Moon Phase Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "degrees_between_s_m",
+          "moon_phase",
+          "sun_phase",
+          "moon_emoji",
+          "moon_phase_name"
+        ],
+        "title": "LunarPhaseModel"
+      },
+      "NatalAspectsRequestModel": {
+        "properties": {
+          "subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          }
+        },
+        "type": "object",
+        "required": [
+          "subject"
+        ],
+        "title": "NatalAspectsRequestModel",
+        "description": "The request model for the Birth Data endpoint."
+      },
+      "PlanetModel": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the planet."
+          },
+          "quality": {
+            "type": "string",
+            "title": "Quality",
+            "description": "The quality of the planet."
+          },
+          "element": {
+            "type": "string",
+            "title": "Element",
+            "description": "The element of the planet."
+          },
+          "sign": {
+            "type": "string",
+            "title": "Sign",
+            "description": "The sign in which the planet is located."
+          },
+          "sign_num": {
+            "type": "integer",
+            "title": "Sign Num",
+            "description": "The number of the sign in which the planet is located."
+          },
+          "position": {
+            "type": "number",
+            "title": "Position",
+            "description": "The position of the planet inside the sign."
+          },
+          "abs_pos": {
+            "type": "number",
+            "title": "Abs Pos",
+            "description": "The absolute position of the planet in the 360 degrees circle of the zodiac."
+          },
+          "emoji": {
+            "type": "string",
+            "title": "Emoji",
+            "description": "The emoji of the planet."
+          },
+          "point_type": {
+            "type": "string",
+            "title": "Point Type",
+            "description": "The type of the point."
+          },
+          "house": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "House",
+            "description": "The house in which the planet is located."
+          },
+          "retrograde": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrograde",
+            "description": "The retrograde status of the planet."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "quality",
+          "element",
+          "sign",
+          "sign_num",
+          "position",
+          "abs_pos",
+          "emoji",
+          "point_type",
+          "house"
+        ],
+        "title": "PlanetModel"
+      },
+      "RelationshipScoreRequestModel": {
+        "properties": {
+          "first_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "second_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          }
+        },
+        "type": "object",
+        "required": [
+          "first_subject",
+          "second_subject"
+        ],
+        "title": "RelationshipScoreRequestModel",
+        "description": "The request model for the Relationship Score endpoint."
+      },
+      "RelationshipScoreResponseModel": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "The status of the response."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DoubleDataModel"
+              }
+            ],
+            "description": "The data of the two subjects."
+          },
+          "score": {
+            "type": "number",
+            "title": "Score",
+            "description": "The relationship score between the two subjects."
+          },
+          "aspects": {
+            "items": {
+              "$ref": "#/components/schemas/AspectModel"
+            },
+            "type": "array",
+            "title": "Aspects",
+            "description": "The aspects between the two subjects. In the Kerykeion library is referred as 'relevant_aspects'."
+          },
+          "is_destiny_sign": {
+            "type": "boolean",
+            "title": "Is Destiny Sign",
+            "description": "If the two sings are reciprocally destiny signs."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data",
+          "score",
+          "aspects",
+          "is_destiny_sign"
+        ],
+        "title": "RelationshipScoreResponseModel"
+      },
+      "SubjectModel": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year",
+            "description": "The year of birth.",
+            "examples": [
+              1980
+            ]
+          },
+          "month": {
+            "type": "integer",
+            "title": "Month",
+            "description": "The month of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "day": {
+            "type": "integer",
+            "title": "Day",
+            "description": "The day of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "hour": {
+            "type": "integer",
+            "title": "Hour",
+            "description": "The hour of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "minute": {
+            "type": "integer",
+            "title": "Minute",
+            "description": "The minute of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude",
+            "description": "The longitude of the birth location. Defaults on London.",
+            "examples": [
+              0
+            ]
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude",
+            "description": "The latitude of the birth location. Defaults on London.",
+            "examples": [
+              51.4825766
+            ]
+          },
+          "city": {
+            "type": "string",
+            "title": "City",
+            "description": "The name of city of birth.",
+            "examples": [
+              "London"
+            ]
+          },
+          "nation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nation",
+            "description": "The name of the nation of birth.",
+            "default": "GB",
+            "examples": [
+              "GB"
+            ]
+          },
+          "timezone": {
+            "type": "string",
+            "title": "Timezone",
+            "description": "The timezone of the birth location.",
+            "examples": [
+              "Europe/London"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the person to get the Birth Chart for.",
+            "examples": [
+              "John Doe"
+            ]
+          },
+          "zodiac_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Tropic",
+                  "Sidereal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Zodiac Type",
+            "description": "The type of zodiac used (Tropic or Sidereal).",
+            "default": "Tropic",
+            "examples": [
+              "Tropic",
+              "Sidereal"
+            ]
+          },
+          "sidereal_mode": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "FAGAN_BRADLEY",
+                  "LAHIRI",
+                  "DELUCE",
+                  "RAMAN",
+                  "USHASHASHI",
+                  "KRISHNAMURTI",
+                  "DJWHAL_KHUL",
+                  "YUKTESHWAR",
+                  "JN_BHASIN",
+                  "BABYL_KUGLER1",
+                  "BABYL_KUGLER2",
+                  "BABYL_KUGLER3",
+                  "BABYL_HUBER",
+                  "BABYL_ETPSC",
+                  "ALDEBARAN_15TAU",
+                  "HIPPARCHOS",
+                  "SASSANIAN",
+                  "J2000",
+                  "J1900",
+                  "B1950"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sidereal Mode",
+            "description": "The sidereal mode used.",
+            "examples": [
+              null
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "longitude",
+          "latitude",
+          "city",
+          "timezone",
+          "name"
+        ],
+        "title": "SubjectModel"
+      },
+      "SynastryAspectsRequestModel": {
+        "properties": {
+          "first_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "second_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          }
+        },
+        "type": "object",
+        "required": [
+          "first_subject",
+          "second_subject"
+        ],
+        "title": "SynastryAspectsRequestModel",
+        "description": "The request model for the Aspects endpoint."
+      },
+      "SynastryAspectsResponseModel": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "The status of the response."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DoubleDataModel"
+              }
+            ],
+            "description": "The data of the two subjects."
+          },
+          "aspects": {
+            "items": {
+              "$ref": "#/components/schemas/AspectModel"
+            },
+            "type": "array",
+            "title": "Aspects",
+            "description": "A list with the aspects between the two subjects."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data",
+          "aspects"
+        ],
+        "title": "SynastryAspectsResponseModel",
+        "description": "The response model for the Aspects endpoint."
+      },
+      "SynastryChartRequestModel": {
+        "properties": {
+          "first_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "second_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "theme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "light",
+                  "dark",
+                  "dark-high-contrast",
+                  "classic"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Theme",
+            "description": "The theme of the chart.",
+            "default": "classic",
+            "examples": [
+              "classic",
+              "light",
+              "dark",
+              "dark-high-contrast"
+            ]
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EN",
+                  "FR",
+                  "PT",
+                  "IT",
+                  "CN",
+                  "ES",
+                  "RU",
+                  "TR",
+                  "DE",
+                  "HI"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language",
+            "description": "The language of the chart.",
+            "default": "EN",
+            "examples": [
+              "EN",
+              "FR",
+              "PT",
+              "IT",
+              "CN",
+              "ES",
+              "RU",
+              "TR",
+              "DE",
+              "HI"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "first_subject",
+          "second_subject"
+        ],
+        "title": "SynastryChartRequestModel",
+        "description": "The request model for the Synastry Chart endpoint."
+      },
+      "SynastryChartResponseModel": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "The status of the response."
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DoubleDataModel"
+              }
+            ],
+            "description": "The data of the two subjects."
+          },
+          "chart": {
+            "type": "string",
+            "title": "Chart",
+            "description": "The SVG chart of the synastry."
+          },
+          "aspects": {
+            "items": {
+              "$ref": "#/components/schemas/AspectModel"
+            },
+            "type": "array",
+            "title": "Aspects",
+            "description": "The aspects between the two subjects."
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data",
+          "chart",
+          "aspects"
+        ],
+        "title": "SynastryChartResponseModel"
+      },
+      "TransitChartRequestModel": {
+        "properties": {
+          "first_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "transit_subject": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TransitSubjectModel"
+              }
+            ],
+            "description": "The name of the person to get the Birth Chart for."
+          },
+          "theme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "light",
+                  "dark",
+                  "dark-high-contrast",
+                  "classic"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Theme",
+            "description": "The theme of the chart.",
+            "default": "classic",
+            "examples": [
+              "classic",
+              "light",
+              "dark",
+              "dark-high-contrast"
+            ]
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "EN",
+                  "FR",
+                  "PT",
+                  "IT",
+                  "CN",
+                  "ES",
+                  "RU",
+                  "TR",
+                  "DE",
+                  "HI"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language",
+            "description": "The language of the chart.",
+            "default": "EN",
+            "examples": [
+              "EN",
+              "FR",
+              "PT",
+              "IT",
+              "CN",
+              "ES",
+              "RU",
+              "TR",
+              "DE",
+              "HI"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "first_subject",
+          "transit_subject"
+        ],
+        "title": "TransitChartRequestModel",
+        "description": "The request model for the Transit Chart endpoint."
+      },
+      "TransitSubjectModel": {
+        "properties": {
+          "year": {
+            "type": "integer",
+            "title": "Year",
+            "description": "The year of birth.",
+            "examples": [
+              1980
+            ]
+          },
+          "month": {
+            "type": "integer",
+            "title": "Month",
+            "description": "The month of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "day": {
+            "type": "integer",
+            "title": "Day",
+            "description": "The day of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "hour": {
+            "type": "integer",
+            "title": "Hour",
+            "description": "The hour of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "minute": {
+            "type": "integer",
+            "title": "Minute",
+            "description": "The minute of birth.",
+            "examples": [
+              12
+            ]
+          },
+          "longitude": {
+            "type": "number",
+            "title": "Longitude",
+            "description": "The longitude of the birth location. Defaults on London.",
+            "examples": [
+              0
+            ]
+          },
+          "latitude": {
+            "type": "number",
+            "title": "Latitude",
+            "description": "The latitude of the birth location. Defaults on London.",
+            "examples": [
+              51.4825766
+            ]
+          },
+          "city": {
+            "type": "string",
+            "title": "City",
+            "description": "The name of city of birth.",
+            "examples": [
+              "London"
+            ]
+          },
+          "nation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nation",
+            "description": "The name of the nation of birth.",
+            "default": "GB",
+            "examples": [
+              "GB"
+            ]
+          },
+          "timezone": {
+            "type": "string",
+            "title": "Timezone",
+            "description": "The timezone of the birth location.",
+            "examples": [
+              "Europe/London"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "longitude",
+          "latitude",
+          "city",
+          "timezone"
+        ],
+        "title": "TransitSubjectModel"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "RapidAPIKey": {
+        "type": "apiKey",
+        "name": "x-rapidapi-key",
+        "in": "header"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://astrologer.p.rapidapi.com/"
+    }
+  ]
+}

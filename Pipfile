@@ -13,6 +13,7 @@ types-pytz = "*"
 pytz = "*"
 scour = "*"
 kerykeion = "*"
+typing-extensions = "*"
 
 [dev-packages]
 black = "*"

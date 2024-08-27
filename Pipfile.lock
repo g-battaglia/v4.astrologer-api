@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "06249fa3d2ff93d5eda647357c0ece547fb359e8c44b5dffb76b35049be22deb"
+            "sha256": "83a6752ad89ffff07075c1ce42472198bc09509230cc456647683381d731c061"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -186,11 +186,11 @@
         },
         "kerykeion": {
             "hashes": [
-                "sha256:d1f952ec823b496c713d488e8b33a9e35765ef331a6d050738bd0f9ac0b3d6a1",
-                "sha256:d9472fdc2f0003f5b12304fe88ee48fccc20400cca094f017cbbb4d617ce244e"
+                "sha256:09ba1a0d0f0c69a3ec6a3d346eb09e3a7f8deca4a20dd2e723d86a58dad5623e",
+                "sha256:ed8f99df4bd469d78c4b4a8629a27bb0069add34268c94b9af00e525024aa66b"
             ],
             "index": "pypi",
-            "version": "==4.18.0"
+            "version": "==4.18.1"
         },
         "platformdirs": {
             "hashes": [
@@ -402,7 +402,7 @@
                 "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
                 "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'",
             "version": "==1.16.0"
         },
         "sniffio": {
@@ -442,7 +442,7 @@
                 "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d",
                 "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"
             ],
-            "markers": "python_version >= '3.8'",
+            "index": "pypi",
             "version": "==4.12.2"
         },
         "url-normalize": {
@@ -665,7 +665,7 @@
                 "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d",
                 "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"
             ],
-            "markers": "python_version >= '3.8'",
+            "index": "pypi",
             "version": "==4.12.2"
         },
         "urllib3": {
