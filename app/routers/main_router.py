@@ -25,7 +25,7 @@ write_request_to_log = get_write_request_to_log(logger)
 router = APIRouter()
 
 
-@router.get("/", tags=["main_router"], response_description="Status of the API", response_model=BirthDataResponseModel, include_in_schema=False)
+@router.get("/", response_description="Status of the API", response_model=BirthDataResponseModel, include_in_schema=False)
 async def status(request: Request) -> JSONResponse:
     """
     Returns the status of the API.
@@ -45,17 +45,15 @@ async def status(request: Request) -> JSONResponse:
 
 @router.get(
     "/api/v4/now",
-    tags=["main_router"],
     response_description="Current astrological data",
     response_model=BirthDataResponseModel,
 )
 async def get_now(request: Request) -> JSONResponse:
     """
-    Returns the current astrological data in JSON format.
+    Retrieve the current astrological data in JSON format.
 
-    Response model:
-    * `status` - The status of the request.
-    * `data` - The data of the astrological subject.
+    This endpoint generates astrological data for the current moment. 
+    The data is returned in a structured JSON format.
     """
 
     # Get current UTC time from the time API
@@ -90,7 +88,7 @@ async def get_now(request: Request) -> JSONResponse:
         return InternalServerErrorJsonResponse
 
 
-@router.post("/api/v4/birth-data", tags=["main_router"], response_description="Birth data", response_model=BirthDataResponseModel)
+@router.post("/api/v4/birth-data", response_description="Birth data", response_model=BirthDataResponseModel)
 async def birth_data(birth_data_request: BirthDataRequestModel, request: Request):
     """
     Returns the Birth data in JSON format.
@@ -131,7 +129,6 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
 
 @router.post(
     "/api/v4/birth-chart",
-    tags=["main_router"],
     response_description="Birth chart",
     response_model=BirthChartResponseModel,
 )
@@ -185,7 +182,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
         return InternalServerErrorJsonResponse
 
 
-@router.post("/api/v4/synastry-chart", tags=["main_router"], response_description="Synastry data")
+@router.post("/api/v4/synastry-chart", response_description="Synastry data")
 async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, request: Request):
     """
     Returns the Synastry data in JSON format.
@@ -259,7 +256,6 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
 
 @router.post(
     "/api/v4/transit-chart",
-    tags=["main_router"],
     response_description="Transit data",
     response_model=SynastryChartResponseModel,
 )
@@ -334,7 +330,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
         return InternalServerErrorJsonResponse
 
 
-@router.post("/api/v4/synastry-aspects-data", tags=["main_router"], response_description="Synastry aspects data", response_model=SynastryAspectsResponseModel)
+@router.post("/api/v4/synastry-aspects-data", response_description="Synastry aspects data", response_model=SynastryAspectsResponseModel)
 async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestModel, request: Request) -> JSONResponse:
     """
     Get the data of a synastry. It returns the data of the two subjects and the aspects between them.
@@ -399,7 +395,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
         return InternalServerErrorJsonResponse
 
 
-@router.post("/api/v4/natal-aspects-data", tags=["main_router"], response_description="Birth aspects data", response_model=SynastryAspectsResponseModel)
+@router.post("/api/v4/natal-aspects-data", response_description="Birth aspects data", response_model=SynastryAspectsResponseModel)
 async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, request: Request) -> JSONResponse:
     """
     Get the data of a synastry. It returns the data of the two subjects and the aspects between them.
@@ -443,7 +439,7 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
         return InternalServerErrorJsonResponse
 
 
-@router.post("/api/v4/relationship-score", tags=["main_router"], response_description="Relationship score", response_model=RelationshipScoreResponseModel)
+@router.post("/api/v4/relationship-score", response_description="Relationship score", response_model=RelationshipScoreResponseModel)
 async def relationship_score(relationship_score_request: RelationshipScoreRequestModel, request: Request) -> JSONResponse:
     """
     Get compatibility score number according to Ciro Discepolo method.

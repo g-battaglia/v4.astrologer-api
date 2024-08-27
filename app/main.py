@@ -27,7 +27,7 @@ app = FastAPI(
 # Routers 
 #------------------------------------------------------------------------------
 
-app.include_router(main_router.router, tags=["main_router"])
+app.include_router(main_router.router, tags=["Endpoints"])
 
 #------------------------------------------------------------------------------
 # Middleware 
