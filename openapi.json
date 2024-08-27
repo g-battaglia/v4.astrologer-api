@@ -12,7 +12,7 @@
           "Endpoints"
         ],
         "summary": "Get Now",
-        "description": "Retrieve the current astrological data in JSON format.\n\nThis endpoint generates astrological data for the current moment. \nThe data is returned in a structured JSON format.",
+        "description": "Retrieve astrological data for the current moment.",
         "operationId": "get_now_api_v4_now_get",
         "responses": {
           "200": {
@@ -59,7 +59,6 @@
           "Endpoints"
         ],
         "summary": "Birth Data",
-        "description": "Returns the Birth data in JSON format.",
         "operationId": "birth_data_api_v4_birth_data_post",
         "requestBody": {
           "content": {
@@ -126,7 +125,6 @@
           "Endpoints"
         ],
         "summary": "Birth Chart",
-        "description": "Returns the Birth data in JSON format.",
         "operationId": "birth_chart_api_v4_birth_chart_post",
         "requestBody": {
           "content": {
@@ -193,7 +191,6 @@
           "Endpoints"
         ],
         "summary": "Synastry Chart",
-        "description": "Returns the Synastry data in JSON format.",
         "operationId": "synastry_chart_api_v4_synastry_chart_post",
         "requestBody": {
           "content": {
@@ -258,7 +255,6 @@
           "Endpoints"
         ],
         "summary": "Transit Chart",
-        "description": "Returns the Birth data in JSON format.",
         "operationId": "transit_chart_api_v4_transit_chart_post",
         "requestBody": {
           "content": {
@@ -325,7 +321,6 @@
           "Endpoints"
         ],
         "summary": "Synastry Aspects Data",
-        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.",
         "operationId": "synastry_aspects_data_api_v4_synastry_aspects_data_post",
         "requestBody": {
           "content": {
@@ -392,7 +387,6 @@
           "Endpoints"
         ],
         "summary": "Natal Aspects Data",
-        "description": "Get the data of a synastry. It returns the data of the two subjects and the aspects between them.",
         "operationId": "natal_aspects_data_api_v4_natal_aspects_data_post",
         "requestBody": {
           "content": {
@@ -459,7 +453,7 @@
           "Endpoints"
         ],
         "summary": "Relationship Score",
-        "description": "Get compatibility score number according to Ciro Discepolo method.",
+        "description": "Calculates the relevance of the relationship between two subjects using the Ciro Discepolo method.\n\nResults:\n    - 0 to 5: Minimal relationship\n    - 5 to 10: Medium relationship\n    - 10 to 15: Important relationship\n    - 15 to 20: Very important relationship\n    - 20 to 35: Exceptional relationship\n    - 30 and above: Rare Exceptional relationship\n\nMore details: https://www-cirodiscepolo-it.translate.goog/Articoli/Discepoloele.htm?_x_tr_sl=it&_x_tr_tl=en&_x_tr_hl=it&_x_tr_pto=wapp",
         "operationId": "relationship_score_api_v4_relationship_score_post",
         "requestBody": {
           "content": {

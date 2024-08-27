@@ -50,10 +50,7 @@ async def status(request: Request) -> JSONResponse:
 )
 async def get_now(request: Request) -> JSONResponse:
     """
-    Retrieve the current astrological data in JSON format.
-
-    This endpoint generates astrological data for the current moment. 
-    The data is returned in a structured JSON format.
+    Retrieve astrological data for the current moment. 
     """
 
     # Get current UTC time from the time API
@@ -90,10 +87,6 @@ async def get_now(request: Request) -> JSONResponse:
 
 @router.post("/api/v4/birth-data", response_description="Birth data", response_model=BirthDataResponseModel)
 async def birth_data(birth_data_request: BirthDataRequestModel, request: Request):
-    """
-    Returns the Birth data in JSON format.
-    """
-
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     subject = birth_data_request.subject
@@ -133,10 +126,6 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
     response_model=BirthChartResponseModel,
 )
 async def birth_chart(request_body: BirthChartRequestModel, request: Request):
-    """
-    Returns the Birth data in JSON format.
-    """
-
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     subject = request_body.subject
@@ -184,10 +173,6 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
 
 @router.post("/api/v4/synastry-chart", response_description="Synastry data")
 async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, request: Request):
-    """
-    Returns the Synastry data in JSON format.
-    """
-
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     first_subject = synastry_chart_request.first_subject
@@ -260,10 +245,6 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
     response_model=SynastryChartResponseModel,
 )
 async def transit_chart(transit_chart_request: TransitChartRequestModel, request: Request):
-    """
-    Returns the Birth data in JSON format.
-    """
-
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     first_subject = transit_chart_request.first_subject
@@ -332,10 +313,6 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
 
 @router.post("/api/v4/synastry-aspects-data", response_description="Synastry aspects data", response_model=SynastryAspectsResponseModel)
 async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestModel, request: Request) -> JSONResponse:
-    """
-    Get the data of a synastry. It returns the data of the two subjects and the aspects between them.
-    """
-
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     first_subject = aspects_request_content.first_subject
@@ -397,10 +374,6 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
 
 @router.post("/api/v4/natal-aspects-data", response_description="Birth aspects data", response_model=SynastryAspectsResponseModel)
 async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, request: Request) -> JSONResponse:
-    """
-    Get the data of a synastry. It returns the data of the two subjects and the aspects between them.
-    """
-
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
     subject = aspects_request_content.subject
@@ -442,7 +415,17 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
 @router.post("/api/v4/relationship-score", response_description="Relationship score", response_model=RelationshipScoreResponseModel)
 async def relationship_score(relationship_score_request: RelationshipScoreRequestModel, request: Request) -> JSONResponse:
     """
-    Get compatibility score number according to Ciro Discepolo method.
+    Calculates the relevance of the relationship between two subjects using the Ciro Discepolo method.
+
+    Results:
+        - 0 to 5: Minimal relationship
+        - 5 to 10: Medium relationship
+        - 10 to 15: Important relationship
+        - 15 to 20: Very important relationship
+        - 20 to 35: Exceptional relationship
+        - 30 and above: Rare Exceptional relationship
+
+    More details: https://www-cirodiscepolo-it.translate.goog/Articoli/Discepoloele.htm?_x_tr_sl=it&_x_tr_tl=en&_x_tr_hl=it&_x_tr_pto=wapp
     """
 
     first_subject = relationship_score_request.first_subject
