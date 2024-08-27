@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field, field_validator
-from kerykeion.kr_types.settings_models import KerykeionChartSettingsModel
 from typing import Optional, Literal
 from pytz import all_timezones
 from kerykeion.kr_types.kr_literals import KerykeionChartTheme

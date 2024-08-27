@@ -2,12 +2,8 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from logging import getLogger
-from kerykeion import AstrologicalSubject, KerykeionChartSVG, RelationshipScore, SynastryAspects, NatalAspects
+from kerykeion import AstrologicalSubject, KerykeionChartSVG, SynastryAspects, NatalAspects, RelationshipScoreFactory
 from requests import get as requests_get
-from pathlib import Path
-from datetime import datetime
-import json
-from scour import scour
 
 # Local
 from ..utils.internal_server_error_json_response import InternalServerErrorJsonResponse
@@ -124,7 +120,7 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
             lat=subject.latitude,
             lng=subject.longitude,
             tz_str=subject.timezone,
-            zodiac_type=subject.zodiac_type,
+            zodiac_type=subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -193,7 +189,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             lat=subject.latitude,
             lng=subject.longitude,
             tz_str=subject.timezone,
-            zodiac_type=subject.zodiac_type,
+            zodiac_type=subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -210,7 +206,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
                 "status": "OK", 
                 "chart": svg, 
                 "data": data,
-                "aspects": kerykeion_chart.aspects_list
+                "aspects": [aspect.model_dump() for aspect in kerykeion_chart.aspects_list]
             },
             status_code=200,
         )
@@ -286,7 +282,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
-            zodiac_type=first_subject.zodiac_type,
+            zodiac_type=first_subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -302,7 +298,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
-            zodiac_type=second_subject.zodiac_type,
+            zodiac_type=second_subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -318,11 +314,11 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             content={
                 "status": "OK",
                 "chart": svg,
+                "aspects": [aspect.model_dump() for aspect in kerykeion_chart.aspects_list],
                 "data": {
                     "first_subject": first_astrological_subject.model().model_dump(),
                     "second_subject": second_astrological_subject.model().model_dump(),
                 },
-                "aspects": kerykeion_chart.aspects_list,
             },
             status_code=200,
         )
@@ -434,78 +430,14 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             content={
                 "status": "OK",
                 "chart": svg,
+                "aspects": [aspect.model_dump() for aspect in kerykeion_chart.aspects_list],
                 "data": {
                     "subject": first_astrological_subject.model().model_dump(),
                     "transit": second_astrological_subject.model().model_dump(),
                 },
-                "aspects": kerykeion_chart.aspects_list,
             },
             status_code=200,
         )
-
-    except Exception as e:
-        write_request_to_log(40, request, e)
-        return InternalServerErrorJsonResponse
-
-
-@router.post("/api/v4/relationship-score", tags=["main_router"], response_description="Relationship score", response_model=RelationshipScoreResponseModel)
-async def relationship_score(relationship_score_request: RelationshipScoreRequestModel, request: Request) -> JSONResponse:
-    """
-    Get compatibility score number according to Ciro Discepolo method.
-    """
-
-    first_subject = relationship_score_request.first_subject
-    second_subject = relationship_score_request.second_subject
-
-    write_request_to_log(20, request, f"Getting composite data for: {first_subject} and {second_subject}")
-
-    try:
-        first_astrological_subject = AstrologicalSubject(
-            name=first_subject.name,
-            year=first_subject.year,
-            month=first_subject.month,
-            day=first_subject.day,
-            hour=first_subject.hour,
-            minute=first_subject.minute,
-            city=first_subject.city,
-            nation=first_subject.nation,
-            lat=first_subject.latitude,
-            lng=first_subject.longitude,
-            tz_str=first_subject.timezone,
-            zodiac_type=first_subject.zodiac_type,
-            online=False,
-        )
-
-        second_astrological_subject = AstrologicalSubject(
-            name=second_subject.name,
-            year=second_subject.year,
-            month=second_subject.month,
-            day=second_subject.day,
-            hour=second_subject.hour,
-            minute=second_subject.minute,
-            city=second_subject.city,
-            nation=second_subject.nation,
-            lat=second_subject.latitude,
-            lng=second_subject.longitude,
-            tz_str=second_subject.timezone,
-            zodiac_type=second_subject.zodiac_type,
-            online=False,
-        )
-
-        score = RelationshipScore(first_astrological_subject, second_astrological_subject).__dict__()
-
-        response_content = {
-            "status": "OK",
-            "data": {
-                "first_subject": first_astrological_subject.model().model_dump(),
-                "second_subject": second_astrological_subject.model().model_dump(),
-            },
-            "score": score["score"],
-            "aspects": score["relevant_aspects"],
-            "is_destiny_sign": score["is_destiny_sign"],
-        }
-
-        return JSONResponse(content=response_content, status_code=200)
 
     except Exception as e:
         write_request_to_log(40, request, e)
@@ -546,13 +478,6 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
-        Available themes are:
-        - "classic"
-        - "dark"
-        - "dark-high-contrast"
-        - "light"
-
     Response model:
     * `status` - The status of the request.
     * `data` - The data of the two subjects.
@@ -577,7 +502,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             lat=first_subject.latitude,
             lng=first_subject.longitude,
             tz_str=first_subject.timezone,
-            zodiac_type=first_subject.zodiac_type,
+            zodiac_type=first_subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -593,7 +518,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             lat=second_subject.latitude,
             lng=second_subject.longitude,
             tz_str=second_subject.timezone,
-            zodiac_type=second_subject.zodiac_type,
+            zodiac_type=second_subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -606,7 +531,7 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
                     "first_subject": first_astrological_subject.model().model_dump(),
                     "second_subject": second_astrological_subject.model().model_dump(),
                 },
-                "aspects": aspects,
+                "aspects": [aspect.model_dump() for aspect in aspects],
             },
             status_code=200,
         )
@@ -636,13 +561,6 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
         * `timezone` - The timezone of the birth location.
         * `zodiac_type` - The type of zodiac used (Tropic or Sidereal).
 
-    * `theme` - Optional field. The theme for the chart. The default theme is "classic".
-        Available themes are:
-        - "classic"
-        - "dark"
-        - "dark-high-contrast"
-        - "light"
-
     Response model:
     * `status` - The status of the request.
     * `data` - The data of the two subjects.
@@ -666,7 +584,7 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             lat=subject.latitude,
             lng=subject.longitude,
             tz_str=subject.timezone,
-            zodiac_type=subject.zodiac_type,
+            zodiac_type=subject.zodiac_type, # type: ignore
             online=False,
         )
 
@@ -676,10 +594,76 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             content={
                 "status": "OK",
                 "data": {"subject": first_astrological_subject.model().model_dump()},
-                "aspects": aspects,
+                "aspects": [aspect.model_dump() for aspect in aspects],
             },
             status_code=200,
         )
+
+    except Exception as e:
+        write_request_to_log(40, request, e)
+        return InternalServerErrorJsonResponse
+
+
+@router.post("/api/v4/relationship-score", tags=["main_router"], response_description="Relationship score", response_model=RelationshipScoreResponseModel)
+async def relationship_score(relationship_score_request: RelationshipScoreRequestModel, request: Request) -> JSONResponse:
+    """
+    Get compatibility score number according to Ciro Discepolo method.
+    """
+
+    first_subject = relationship_score_request.first_subject
+    second_subject = relationship_score_request.second_subject
+
+    write_request_to_log(20, request, f"Getting composite data for: {first_subject} and {second_subject}")
+
+    try:
+        first_astrological_subject = AstrologicalSubject(
+            name=first_subject.name,
+            year=first_subject.year,
+            month=first_subject.month,
+            day=first_subject.day,
+            hour=first_subject.hour,
+            minute=first_subject.minute,
+            city=first_subject.city,
+            nation=first_subject.nation,
+            lat=first_subject.latitude,
+            lng=first_subject.longitude,
+            tz_str=first_subject.timezone,
+            zodiac_type=first_subject.zodiac_type, # type: ignore
+            online=False,
+        )
+
+        second_astrological_subject = AstrologicalSubject(
+            name=second_subject.name,
+            year=second_subject.year,
+            month=second_subject.month,
+            day=second_subject.day,
+            hour=second_subject.hour,
+            minute=second_subject.minute,
+            city=second_subject.city,
+            nation=second_subject.nation,
+            lat=second_subject.latitude,
+            lng=second_subject.longitude,
+            tz_str=second_subject.timezone,
+            zodiac_type=second_subject.zodiac_type, # type: ignore
+            online=False,
+        )
+
+        score_factory = RelationshipScoreFactory(first_astrological_subject, second_astrological_subject)
+        score_model = score_factory.get_relationship_score()
+
+        response_content = {
+            "status": "OK",
+            "score": score_model.score_value,
+            "score_description": score_model.score_description,
+            "aspects": [aspect.model_dump() for aspect in score_model.aspects],
+            "is_destiny_sign": score_model.is_destiny_sign,
+            "data": {
+                "first_subject": first_astrological_subject.model().model_dump(),
+                "second_subject": second_astrological_subject.model().model_dump(),
+            },
+        }
+
+        return JSONResponse(content=response_content, status_code=200)
 
     except Exception as e:
         write_request_to_log(40, request, e)
