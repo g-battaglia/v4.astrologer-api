@@ -1,7 +1,7 @@
 app_name = "Astrologer API"
 version = "4.0.0"
-description = "An API for astrological calculations."
-admin_email = "giacomo.battaglia@yahoo.it"
+description = "Astrology Made Easy"
+admin_email = "kerykeion.astrology@gmail.com"
 debug = false
 docs_url = "/docs"
 redoc_url = "/redoc"

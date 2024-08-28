@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Astrologer API",
-    "description": "An API for astrological calculations.",
+    "description": "Astrology Made Easy",
     "version": "4.0.0"
   },
   "paths": {
