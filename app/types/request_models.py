@@ -13,7 +13,7 @@ class AbstractBaseSubjectModel(BaseModel, ABC):
     longitude: float = Field(description="The longitude of the birth location. Defaults on London.", examples=[0])
     latitude: float = Field(description="The latitude of the birth location. Defaults on London.", examples=[51.4825766])
     city: str = Field(description="The name of city of birth.", examples=["London"])
-    nation: Optional[str] = Field(default="GB", description="The name of the nation of birth.", examples=["GB"])
+    nation: Optional[str] = Field(default="GB", description="The name of the nation of birth.", examples=["GB"], min_length=2, max_length=2)
     timezone: str = Field(description="The timezone of the birth location.", examples=["Europe/London"])
 
 
@@ -76,10 +76,8 @@ class AbstractBaseSubjectModel(BaseModel, ABC):
 
     @field_validator("nation")
     def validate_nation(cls, value):
-        if len(value) != 2:
-            raise ValueError(f"Invalid nation '{value}'. Please use a two-letter country code.")
-        return value
-
+        if not value:
+            return "null"
 
 class SubjectModel(AbstractBaseSubjectModel):
     name: str = Field(description="The name of the person to get the Birth Chart for.", examples=["John Doe"])
