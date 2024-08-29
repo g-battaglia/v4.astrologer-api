@@ -40,7 +40,7 @@ For accurate astrological calculations, it is important to use the correct timez
 
 All the `*-chart` endpoints have:
 
-#### Languages
+**Languages:**
 
 The `lang` parameter that allows you to choose the language of the chart. The available options are:
 
@@ -54,7 +54,7 @@ The `lang` parameter that allows you to choose the language of the chart. The av
 - `CN`: Chinese
 - `DE`: German
 
-#### Themes
+**Themes:**
 
 - The `theme` parameter that allows you to customize the appearance of the chart. The available themes are:
   - `classic`: A traditional colorful theme
