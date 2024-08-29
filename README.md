@@ -16,12 +16,12 @@ To begin using the Astrologer API, include your API key in the request headers. 
 
 Ensure your API requests include the following headers:
 
-...
+```javascript
 headers: {
-'X-RapidAPI-Host': 'astrologer.p.rapidapi.com',
-'X-RapidAPI-Key': 'YOUR_API_KEY'
-}
-...
+    'X-RapidAPI-Host': 'astrologer.p.rapidapi.com',
+    'X-RapidAPI-Key': 'YOUR_API_KEY'
+    }
+```
 
 Replace `YOUR_API_KEY` with your actual API key obtained during registration.
 
