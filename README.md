@@ -1,48 +1,39 @@
 # Astrologer API
 
-Astrologer API is a RESTful API that provides access to comprehensive astrology calculations. It is designed to be easy to integrate into your projects, offering a wide range of astrological data and insights.
+The Astrologer API is a RESTful service providing extensive astrology calculations, designed for seamless integration into your projects. It offers a rich set of astrological data and insights, making it an invaluable tool for both developers and astrology enthusiasts.
 
-Check the OpenAPI (Swagger) documentation:
-<a href="https://www.kerykeion.net/astrologer-api-swagger/" target="_blank">https://www.kerykeion.net/astrologer-api-swagger/</a>
+## Documentation
+
+Explore the comprehensive API documentation with interactive features:
+
+[Astrologer API OpenAPI (Swagger) Documentation](https://www.kerykeion.net/astrologer-api-swagger/)
 
 ## Getting Started
 
-To use the Astrologer API, you need to include your API key in the request headers. This ensures that your requests are authenticated and processed correctly.
+To begin using the Astrologer API, include your API key in the request headers. This key is essential for authenticating your requests and ensuring they are processed correctly.
 
-**Example Request Headers:**
+### Example Request Headers
 
-Make sure to include the following headers in your API requests:
+Ensure your API requests include the following headers:
 
-```javascript
+...
 headers: {
-    'X-RapidAPI-Host': 'astrologer.p.rapidapi.com',
-    'X-RapidAPI-Key': 'YOUR_API_KEY'
+'X-RapidAPI-Host': 'astrologer.p.rapidapi.com',
+'X-RapidAPI-Key': 'YOUR_API_KEY'
 }
-```
+...
 
-Replace `YOUR_API_KEY` with your actual API key.
-
-## Interactive Documentation
-
-You can try the interactive OpenApi (Swagger) documentation here:
-
-<a href="https://www.kerykeion.net/astrologer-api-swagger/" target="_blank">AstrologerAPI OpenAPI</a>
-
-## Timezones
-
-For accurate astrological calculations, it is important to use the correct timezone. You can find a comprehensive list of all timezones at the following link:
-
-<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones" target="_blank">Timezones List</a>
+Replace `YOUR_API_KEY` with your actual API key obtained during registration.
 
 ## Features
 
 ### Charts
 
-All the `*-chart` endpoints have:
+The Astrologer API provides various `*-chart` endpoints with customizable options:
 
-**Languages:**
+#### Languages
 
-The `lang` parameter that allows you to choose the language of the chart. The available options are:
+You can specify the `lang` parameter to select the language for your chart. Available options are:
 
 - `EN`: English (default)
 - `FR`: French
@@ -54,61 +45,73 @@ The `lang` parameter that allows you to choose the language of the chart. The av
 - `CN`: Chinese
 - `DE`: German
 
-**Themes:**
+#### Themes
 
-- The `theme` parameter that allows you to customize the appearance of the chart. The available themes are:
-  - `classic`: A traditional colorful theme
-  - `light`: A modern light theme with soft colors
-  - `dark`: A modern dark theme
-  - `dark-high-contrast`: dark with more contrast for better readability
+Customize the appearance of your charts using the `theme` parameter. Available themes include:
 
-## Sidereal/Tropical (Tropic) Zodiac
+- `classic`: A traditional, colorful theme
+- `light`: A modern, soft-colored light theme
+- `dark`: A modern dark theme
+- `dark-high-contrast`: A dark theme with enhanced contrast for better readability
 
-In the `subject` key of most of the endpoints, you can choose between the sidereal and tropical zodiacs with the `zodiac_type` parameter that allows you to choose between the sidereal and tropical zodiacs. The available options are:
+### Zodiac Types
 
-- `tropic`: The tropical zodiac (default)
-- `sidereal`: The sidereal zodiac. If the `zodiac_type` parameter is set to `sidereal`, the `sidereal_mode` parameter must also be set.
-  Available `sidereal_mode` (aka ayanamshas) are:
+You can choose between the Sidereal and Tropical zodiacs using the `zodiac_type` parameter in the `subject` key of most endpoints.
 
-  - `FAGAN_BRADLEY`
-  - `LAHIRI`
-  - `DELUCE`
-  - `RAMAN`
-  - `USHASHASHI`
-  - `KRISHNAMURTI`
-  - `DJWHAL_KHUL`
-  - `YUKTESHWAR`
-  - `JN_BHASIN`
-  - `BABYL_KUGLER1`
-  - `BABYL_KUGLER2`
-  - `BABYL_KUGLER3`
-  - `BABYL_HUBER`
-  - `BABYL_ETPSC`
-  - `ALDEBARAN_15TAU`
-  - `HIPPARCHOS`
-  - `SASSANIAN`
-  - `J2000`
-  - `J1900`
-  - `B1950`
+- `tropic`: Tropical zodiac (default)
+- `sidereal`: Sidereal zodiac
 
-  **Most used ayanamshas are `FAGAN_BRADLEY` and `LAHIRI` (standard for Vedic astrology).**
+If you select `sidereal`, you must also specify the `sidereal_mode` parameter, which offers various ayanamsha (zodiacal calculation modes):
+
+- `FAGAN_BRADLEY`
+- `LAHIRI` (standard for Vedic astrology)
+- `DELUCE`
+- `RAMAN`
+- `USHASHASHI`
+- `KRISHNAMURTI`
+- `DJWHAL_KHUL`
+- `YUKTESHWAR`
+- `JN_BHASIN`
+- `BABYL_KUGLER1`
+- `BABYL_KUGLER2`
+- `BABYL_KUGLER3`
+- `BABYL_HUBER`
+- `BABYL_ETPSC`
+- `ALDEBARAN_15TAU`
+- `HIPPARCHOS`
+- `SASSANIAN`
+- `J2000`
+- `J1900`
+- `B1950`
+
+The most commonly used ayanamshas are `FAGAN_BRADLEY` and `LAHIRI`.
+
+## Timezones
+
+Accurate astrological calculations require the correct timezone. Refer to the following link for a complete list of timezones:
+
+[List of TZ Database Time Zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
 ## Copyright and License
 
-Astrologer API is a Free/Libre Open Source Software, you can check the source code in the official repos:
+Astrologer API is Free/Libre Open Source Software. You can review and contribute to the source code via the official repositories:
 
-- V4: https://github.com/g-battaglia/v4.astrologer-api
+- [V4 Astrologer API](https://github.com/g-battaglia/v4.astrologer-api)
+- [V3 Astrologer API](https://github.com/g-battaglia/Astrologer-API)
 
-- V3: https://github.com/g-battaglia/Astrologer-API
+Astrologer API is developed by Giacomo Battaglia and is based on Kerykeion, a Python library for astrology calculations by the same author. The underlying tools are built on the Swiss Ephemeris, which requires adherence to the AGPL license and preservation of the Swiss Ephemeris copyright.
 
-Astrologer API is a project by Giacomo Battaglia, it's based ok Kerykeion, which is from the same author and is a Python library for astrology calculations. All the tools underneath are built upon the Swiss Ephemeris and must preserve the copyright of the Swiss Ephemeris and the AGPL license.
+Swiss Ephemeris Authors:
 
-Authors of the Swiss Ephemeris: Dieter Koch and Alois Treindl (Astrodienst AG, Zuerich)
+- Dieter Koch
+- Alois Treindl (Astrodienst AG, Zurich)
 
 ## Commercial Use
 
-This API can be used for commercial purposes in any application since it is an external API. The final application, if it does not integrate Kerykeion o
+The Astrologer API can be used in commercial applications, as it operates as an external API. If your application does not directly integrate Kerykeion or other underlying libraries, there are no additional restrictions.
 
-## Subscribe
+## Subscription
 
-Subscribe here: [AstrologerAPI](https://rapidapi.com/gbattaglia/api/astrologer/pricing)
+To access the Astrologer API, subscribe here:
+
+[Subscribe to Astrologer API](https://rapidapi.com/gbattaglia/api/astrologer/pricing)
