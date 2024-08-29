@@ -44,6 +44,7 @@ You can specify the `lang` parameter to select the language for your chart. Avai
 - `IT`: Italian
 - `CN`: Chinese
 - `DE`: German
+- `HI`: Hindi
 
 #### Themes
 
