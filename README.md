@@ -102,11 +102,6 @@ Astrologer API is Free/Libre Open Source Software. You can review and contribute
 
 Astrologer API is developed by Giacomo Battaglia and is based on Kerykeion, a Python library for astrology calculations by the same author. The underlying tools are built on the Swiss Ephemeris, which requires adherence to the AGPL license and preservation of the Swiss Ephemeris copyright.
 
-Swiss Ephemeris Authors:
-
-- Dieter Koch
-- Alois Treindl (Astrodienst AG, Zurich)
-
 ## Commercial Use
 
 The Astrologer API can be used in commercial applications, as it operates as an external API. If your application does not directly integrate Kerykeion or other underlying libraries, there are no additional restrictions.
