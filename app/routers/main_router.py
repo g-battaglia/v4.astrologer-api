@@ -50,7 +50,7 @@ async def status(request: Request) -> JSONResponse:
 )
 async def get_now(request: Request) -> JSONResponse:
     """
-    Retrieve astrological data for the current moment. 
+    Retrieve astrological data for the current moment.
     """
 
     # Get current UTC time from the time API
@@ -158,8 +158,8 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
 
         return JSONResponse(
             content={
-                "status": "OK", 
-                "chart": svg, 
+                "status": "OK",
+                "chart": svg,
                 "data": data,
                 "aspects": [aspect.model_dump() for aspect in kerykeion_chart.aspects_list]
             },

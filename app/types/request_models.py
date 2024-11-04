@@ -78,6 +78,7 @@ class AbstractBaseSubjectModel(BaseModel, ABC):
     def validate_nation(cls, value):
         if not value:
             return "null"
+        return value
 
 class SubjectModel(AbstractBaseSubjectModel):
     name: str = Field(description="The name of the person to get the Birth Chart for.", examples=["John Doe"])
