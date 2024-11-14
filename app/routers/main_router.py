@@ -17,7 +17,13 @@ from ..types.request_models import (
     SynastryAspectsRequestModel,
     NatalAspectsRequestModel,
 )
-from ..types.response_models import BirthDataResponseModel, BirthChartResponseModel, SynastryChartResponseModel, RelationshipScoreResponseModel, SynastryAspectsResponseModel
+from ..types.response_models import (
+    BirthDataResponseModel,
+    BirthChartResponseModel,
+    SynastryChartResponseModel,
+    RelationshipScoreResponseModel,
+    SynastryAspectsResponseModel
+)
 
 logger = getLogger(__name__)
 write_request_to_log = get_write_request_to_log(logger)
@@ -43,11 +49,7 @@ async def status(request: Request) -> JSONResponse:
     return JSONResponse(content=response_dict, status_code=200)
 
 
-@router.get(
-    "/api/v4/now",
-    response_description="Current astrological data",
-    response_model=BirthDataResponseModel,
-)
+@router.get("/api/v4/now", response_description="Current astrological data", response_model=BirthDataResponseModel)
 async def get_now(request: Request) -> JSONResponse:
     """
     Retrieve astrological data for the current moment.
@@ -120,11 +122,7 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
         return InternalServerErrorJsonResponse
 
 
-@router.post(
-    "/api/v4/birth-chart",
-    response_description="Birth chart",
-    response_model=BirthChartResponseModel,
-)
+@router.post("/api/v4/birth-chart", response_description="Birth chart", response_model=BirthChartResponseModel)
 async def birth_chart(request_body: BirthChartRequestModel, request: Request):
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
@@ -241,11 +239,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
         return InternalServerErrorJsonResponse
 
 
-@router.post(
-    "/api/v4/transit-chart",
-    response_description="Transit data",
-    response_model=SynastryChartResponseModel,
-)
+@router.post("/api/v4/transit-chart", response_description="Transit data", response_model=SynastryChartResponseModel)
 async def transit_chart(transit_chart_request: TransitChartRequestModel, request: Request):
     write_request_to_log(20, request, f"Getting birth chart for: {request}")
 
