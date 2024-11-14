@@ -153,6 +153,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
         kerykeion_chart = KerykeionChartSVG(
             astrological_subject,
             theme=request_body.theme,
+            chart_language=request_body.language or "EN",
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
 
@@ -218,6 +219,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             second_obj=second_astrological_subject,
             chart_type="Synastry",
             theme=synastry_chart_request.theme,
+            chart_language=synastry_chart_request.language or "EN",
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
 
@@ -290,6 +292,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             second_obj=second_astrological_subject,
             chart_type="Transit",
             theme=transit_chart_request.theme,
+            chart_language=transit_chart_request.language or "EN",
         )
         svg = kerykeion_chart.makeTemplate(minify=True)
 
