@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, get_args, Union
 from pytz import all_timezones
-from kerykeion.kr_types.kr_literals import KerykeionChartTheme, KerykeionChartLanguage, SiderealMode, ZodiacType
+from kerykeion.kr_types.kr_literals import KerykeionChartTheme, KerykeionChartLanguage, SiderealMode, ZodiacType, HousesSystemIdentifier, PerspectiveType
 from abc import ABC
 
 class AbstractBaseSubjectModel(BaseModel, ABC):
@@ -84,6 +84,8 @@ class SubjectModel(AbstractBaseSubjectModel):
     name: str = Field(description="The name of the person to get the Birth Chart for.", examples=["John Doe"])
     zodiac_type: Optional[ZodiacType] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=list(get_args(ZodiacType)))
     sidereal_mode: Union[SiderealMode, None] = Field(default=None, description="The sidereal mode used.", examples=[None])
+    perspective_type: Optional[PerspectiveType] = Field(default="Apparent Geocentric", description="The perspective type used.", examples=list(get_args(PerspectiveType)))
+    houses_system_identifier: Optional[HousesSystemIdentifier] = Field(default="P", description="The houses system used.", examples=list(get_args(HousesSystemIdentifier)))
 
     @field_validator("zodiac_type")
     def validate_zodiac_type(cls, value, info):
