@@ -1972,29 +1972,7 @@
             "description": "The houses system used.",
             "default": "P",
             "examples": [
-              "A",
-              "B",
-              "C",
-              "D",
-              "F",
-              "H",
-              "I",
-              "i",
-              "K",
-              "L",
-              "M",
-              "N",
-              "O",
-              "P",
-              "Q",
-              "R",
-              "S",
-              "T",
-              "U",
-              "V",
-              "W",
-              "X",
-              "Y"
+              "A"
             ]
           }
         },
