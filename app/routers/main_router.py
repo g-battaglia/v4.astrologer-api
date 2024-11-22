@@ -108,6 +108,8 @@ async def birth_data(birth_data_request: BirthDataRequestModel, request: Request
             tz_str=subject.timezone,
             zodiac_type=subject.zodiac_type, # type: ignore
             sidereal_mode=subject.sidereal_mode,
+            houses_system_identifier=subject.houses_system_identifier, # type: ignore
+            perspective_type=subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -143,6 +145,8 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             tz_str=subject.timezone,
             zodiac_type=subject.zodiac_type, # type: ignore
             sidereal_mode=subject.sidereal_mode,
+            houses_system_identifier=subject.houses_system_identifier, # type: ignore
+            perspective_type=subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -192,6 +196,8 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
             sidereal_mode=first_subject.sidereal_mode,
+            houses_system_identifier=first_subject.houses_system_identifier, # type: ignore
+            perspective_type=first_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -209,6 +215,8 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             tz_str=second_subject.timezone,
             zodiac_type=second_subject.zodiac_type, # type: ignore
             sidereal_mode=second_subject.sidereal_mode,
+            houses_system_identifier=second_subject.houses_system_identifier, # type: ignore
+            perspective_type=second_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -261,6 +269,8 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
             sidereal_mode=first_subject.sidereal_mode,
+            houses_system_identifier=first_subject.houses_system_identifier, # type: ignore
+            perspective_type=first_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -278,6 +288,8 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             tz_str=second_subject.timezone,
             zodiac_type=first_astrological_subject.zodiac_type, # type: ignore
             sidereal_mode=first_subject.sidereal_mode,
+            houses_system_identifier=first_subject.houses_system_identifier, # type: ignore
+            perspective_type=first_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -330,6 +342,8 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
             sidereal_mode=first_subject.sidereal_mode,
+            houses_system_identifier=first_subject.houses_system_identifier, # type: ignore
+            perspective_type=first_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -347,6 +361,8 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             tz_str=second_subject.timezone,
             zodiac_type=second_subject.zodiac_type, # type: ignore
             sidereal_mode=second_subject.sidereal_mode,
+            houses_system_identifier=second_subject.houses_system_identifier, # type: ignore
+            perspective_type=second_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -390,6 +406,8 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             tz_str=subject.timezone,
             zodiac_type=subject.zodiac_type, # type: ignore
             sidereal_mode=subject.sidereal_mode,
+            houses_system_identifier=subject.houses_system_identifier, # type: ignore
+            perspective_type=subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -445,6 +463,8 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             tz_str=first_subject.timezone,
             zodiac_type=first_subject.zodiac_type, # type: ignore
             sidereal_mode=first_subject.sidereal_mode,
+            houses_system_identifier=first_subject.houses_system_identifier, # type: ignore
+            perspective_type=first_subject.perspective_type, # type: ignore
             online=False,
         )
 
@@ -462,6 +482,8 @@ async def relationship_score(relationship_score_request: RelationshipScoreReques
             tz_str=second_subject.timezone,
             zodiac_type=second_subject.zodiac_type, # type: ignore
             sidereal_mode=second_subject.sidereal_mode,
+            houses_system_identifier=second_subject.houses_system_identifier, # type: ignore
+            perspective_type=second_subject.perspective_type, # type: ignore
             online=False,
         )
 
