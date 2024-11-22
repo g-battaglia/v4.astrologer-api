@@ -827,6 +827,12 @@
           "true_node": {
             "$ref": "#/components/schemas/KerykeionPointModel"
           },
+          "mean_south_node": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "true_south_node": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
           "lunar_phase": {
             "$ref": "#/components/schemas/LunarPhaseModel"
           },
@@ -846,6 +852,8 @@
                 "Pluto",
                 "Mean_Node",
                 "True_Node",
+                "Mean_South_Node",
+                "True_South_Node",
                 "Chiron",
                 "Mean_Lilith"
               ]
@@ -924,6 +932,8 @@
           "twelfth_house",
           "mean_node",
           "true_node",
+          "mean_south_node",
+          "true_south_node",
           "lunar_phase",
           "planets_names_list",
           "houses_names_list"
@@ -933,11 +943,7 @@
       "BirthChartRequestModel": {
         "properties": {
           "subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "theme": {
@@ -1001,6 +1007,19 @@
               "DE",
               "HI"
             ]
+          },
+          "wheel_only": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wheel Only",
+            "description": "If set to True, only the zodiac wheel will be returned. No additional information will be displayed.",
+            "default": false
           }
         },
         "type": "object",
@@ -1018,11 +1037,7 @@
             "description": "The status of the response."
           },
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BirthDataModel"
-              }
-            ],
+            "$ref": "#/components/schemas/BirthDataModel",
             "description": "The data of the subject."
           },
           "chart": {
@@ -1126,203 +1141,103 @@
             "description": "The Julian day of birth."
           },
           "sun": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the Sun."
           },
           "moon": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the Moon."
           },
           "mercury": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Mercury."
           },
           "venus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Venus."
           },
           "mars": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Mars."
           },
           "jupiter": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Jupiter."
           },
           "saturn": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Saturn."
           },
           "uranus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Uranus."
           },
           "neptune": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Neptune."
           },
           "pluto": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Pluto."
           },
           "chiron": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of Chiron."
           },
           "first_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the first house."
           },
           "second_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the second house."
           },
           "third_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the third house."
           },
           "fourth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the fourth house."
           },
           "fifth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the fifth house."
           },
           "sixth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the sixth house."
           },
           "seventh_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the seventh house."
           },
           "eighth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the eighth house."
           },
           "ninth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the ninth house."
           },
           "tenth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the tenth house."
           },
           "eleventh_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the eleventh house."
           },
           "twelfth_house": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the twelfth house."
           },
           "mean_node": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the mean node."
           },
           "true_node": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PlanetModel"
-              }
-            ],
+            "$ref": "#/components/schemas/PlanetModel",
             "description": "The data of the true node."
           },
           "lunar_phase": {
@@ -1385,11 +1300,7 @@
       "BirthDataRequestModel": {
         "properties": {
           "subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           }
         },
@@ -1408,11 +1319,7 @@
             "description": "The status of the response."
           },
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/BirthDataModel"
-              }
-            ],
+            "$ref": "#/components/schemas/BirthDataModel",
             "description": "The data of the subject."
           }
         },
@@ -1426,19 +1333,11 @@
       "DoubleDataModel": {
         "properties": {
           "first_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AstrologicalSubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/AstrologicalSubjectModel",
             "description": "The data of the first subject."
           },
           "second_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AstrologicalSubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/AstrologicalSubjectModel",
             "description": "The data of the second subject."
           }
         },
@@ -1481,6 +1380,8 @@
                   "Pluto",
                   "Mean_Node",
                   "True_Node",
+                  "Mean_South_Node",
+                  "True_South_Node",
                   "Chiron",
                   "Mean_Lilith"
                 ]
@@ -1695,11 +1596,7 @@
       "NatalAspectsRequestModel": {
         "properties": {
           "subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           }
         },
@@ -1800,19 +1697,11 @@
       "RelationshipScoreRequestModel": {
         "properties": {
           "first_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "second_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           }
         },
@@ -1832,11 +1721,7 @@
             "description": "The status of the response."
           },
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DoubleDataModel"
-              }
-            ],
+            "$ref": "#/components/schemas/DoubleDataModel",
             "description": "The data of the two subjects."
           },
           "score": {
@@ -1937,9 +1822,7 @@
           "nation": {
             "anyOf": [
               {
-                "type": "string",
-                "maxLength": 2,
-                "minLength": 2
+                "type": "string"
               },
               {
                 "type": "null"
@@ -2025,6 +1908,94 @@
             "examples": [
               null
             ]
+          },
+          "perspective_type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "Apparent Geocentric",
+                  "Heliocentric",
+                  "Topocentric",
+                  "True Geocentric"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perspective Type",
+            "description": "The perspective type used.",
+            "default": "Apparent Geocentric",
+            "examples": [
+              "Apparent Geocentric",
+              "Heliocentric",
+              "Topocentric",
+              "True Geocentric"
+            ]
+          },
+          "houses_system_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C",
+                  "D",
+                  "F",
+                  "H",
+                  "I",
+                  "i",
+                  "K",
+                  "L",
+                  "M",
+                  "N",
+                  "O",
+                  "P",
+                  "Q",
+                  "R",
+                  "S",
+                  "T",
+                  "U",
+                  "V",
+                  "W",
+                  "X",
+                  "Y"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Houses System Identifier",
+            "description": "The houses system used.",
+            "default": "P",
+            "examples": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "F",
+              "H",
+              "I",
+              "i",
+              "K",
+              "L",
+              "M",
+              "N",
+              "O",
+              "P",
+              "Q",
+              "R",
+              "S",
+              "T",
+              "U",
+              "V",
+              "W",
+              "X",
+              "Y"
+            ]
           }
         },
         "type": "object",
@@ -2045,19 +2016,11 @@
       "SynastryAspectsRequestModel": {
         "properties": {
           "first_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "second_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           }
         },
@@ -2077,11 +2040,7 @@
             "description": "The status of the response."
           },
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DoubleDataModel"
-              }
-            ],
+            "$ref": "#/components/schemas/DoubleDataModel",
             "description": "The data of the two subjects."
           },
           "aspects": {
@@ -2105,19 +2064,11 @@
       "SynastryChartRequestModel": {
         "properties": {
           "first_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "second_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "theme": {
@@ -2181,6 +2132,19 @@
               "DE",
               "HI"
             ]
+          },
+          "wheel_only": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wheel Only",
+            "description": "If set to True, only the zodiac wheel will be returned. No additional information will be displayed.",
+            "default": false
           }
         },
         "type": "object",
@@ -2199,11 +2163,7 @@
             "description": "The status of the response."
           },
           "data": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DoubleDataModel"
-              }
-            ],
+            "$ref": "#/components/schemas/DoubleDataModel",
             "description": "The data of the two subjects."
           },
           "chart": {
@@ -2232,19 +2192,11 @@
       "TransitChartRequestModel": {
         "properties": {
           "first_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "transit_subject": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TransitSubjectModel"
-              }
-            ],
+            "$ref": "#/components/schemas/TransitSubjectModel",
             "description": "The name of the person to get the Birth Chart for."
           },
           "theme": {
@@ -2308,6 +2260,19 @@
               "DE",
               "HI"
             ]
+          },
+          "wheel_only": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wheel Only",
+            "description": "If set to True, only the zodiac wheel will be returned. No additional information will be displayed.",
+            "default": false
           }
         },
         "type": "object",
@@ -2387,9 +2352,7 @@
           "nation": {
             "anyOf": [
               {
-                "type": "string",
-                "maxLength": 2,
-                "minLength": 2
+                "type": "string"
               },
               {
                 "type": "null"
