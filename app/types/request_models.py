@@ -85,7 +85,7 @@ class SubjectModel(AbstractBaseSubjectModel):
     zodiac_type: Optional[ZodiacType] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=list(get_args(ZodiacType)))
     sidereal_mode: Union[SiderealMode, None] = Field(default=None, description="The sidereal mode used.", examples=[None])
     perspective_type: Union[PerspectiveType, None] = Field(default="Apparent Geocentric", description="The perspective type used.", examples=list(get_args(PerspectiveType)))
-    houses_system_identifier: Union[HousesSystemIdentifier, None] = Field(default="P", description="The houses system used.", examples=list(get_args(HousesSystemIdentifier)))
+    houses_system_identifier: Union[HousesSystemIdentifier, None] = Field(default="P", description="The houses system used.", examples=['A'])
 
     @field_validator("zodiac_type")
     def validate_zodiac_type(cls, value, info):
