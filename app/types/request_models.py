@@ -125,6 +125,7 @@ class BirthChartRequestModel(BaseModel):
     subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
+    wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
 
 class SynastryChartRequestModel(BaseModel):
     """
@@ -135,6 +136,7 @@ class SynastryChartRequestModel(BaseModel):
     second_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
+    wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
 
 class TransitChartRequestModel(BaseModel):
     """
@@ -145,6 +147,7 @@ class TransitChartRequestModel(BaseModel):
     transit_subject: TransitSubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
+    wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
 
 
 class BirthDataRequestModel(BaseModel):

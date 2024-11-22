@@ -157,7 +157,11 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             theme=request_body.theme,
             chart_language=request_body.language or "EN",
         )
-        svg = kerykeion_chart.makeTemplate(minify=True)
+
+        if request_body.wheel_only:
+            svg = kerykeion_chart.makeWheelOnlyTemplate(minify=True)
+        else:
+            svg = kerykeion_chart.makeTemplate(minify=True)
 
         return JSONResponse(
             content={
@@ -227,7 +231,11 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             theme=synastry_chart_request.theme,
             chart_language=synastry_chart_request.language or "EN",
         )
-        svg = kerykeion_chart.makeTemplate(minify=True)
+
+        if synastry_chart_request.wheel_only:
+            svg = kerykeion_chart.makeWheelOnlyTemplate(minify=True)
+        else:
+            svg = kerykeion_chart.makeTemplate(minify=True)
 
         return JSONResponse(
             content={
@@ -300,7 +308,11 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             theme=transit_chart_request.theme,
             chart_language=transit_chart_request.language or "EN",
         )
-        svg = kerykeion_chart.makeTemplate(minify=True)
+
+        if transit_chart_request.wheel_only:
+            svg = kerykeion_chart.makeWheelOnlyTemplate(minify=True)
+        else:
+            svg = kerykeion_chart.makeTemplate(minify=True)
 
         return JSONResponse(
             content={

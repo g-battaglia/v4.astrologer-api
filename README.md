@@ -87,6 +87,16 @@ If you select `sidereal`, you must also specify the `sidereal_mode` parameter, w
 
 The most commonly used ayanamshas are `FAGAN_BRADLEY` and `LAHIRI`.
 
+### House Systems
+
+[...]
+
+### Perspective
+
+[...]
+
+### Wheel Only Charts
+
 ## Timezones
 
 Accurate astrological calculations require the correct timezone. Refer to the following link for a complete list of timezones:
