@@ -1972,7 +1972,7 @@
             "description": "The houses system used.",
             "default": "P",
             "examples": [
-              "A"
+              "P"
             ]
           }
         },
