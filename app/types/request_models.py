@@ -84,8 +84,8 @@ class SubjectModel(AbstractBaseSubjectModel):
     name: str = Field(description="The name of the person to get the Birth Chart for.", examples=["John Doe"])
     zodiac_type: Optional[ZodiacType] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=list(get_args(ZodiacType)))
     sidereal_mode: Union[SiderealMode, None] = Field(default=None, description="The sidereal mode used.", examples=[None])
-    perspective_type: Optional[PerspectiveType] = Field(default="Apparent Geocentric", description="The perspective type used.", examples=list(get_args(PerspectiveType)))
-    houses_system_identifier: Optional[HousesSystemIdentifier] = Field(default="P", description="The houses system used.", examples=list(get_args(HousesSystemIdentifier)))
+    perspective_type: Union[PerspectiveType, None] = Field(default="Apparent Geocentric", description="The perspective type used.", examples=list(get_args(PerspectiveType)))
+    houses_system_identifier: Union[HousesSystemIdentifier, None] = Field(default="P", description="The houses system used.", examples=list(get_args(HousesSystemIdentifier)))
 
     @field_validator("zodiac_type")
     def validate_zodiac_type(cls, value, info):
@@ -98,6 +98,20 @@ class SubjectModel(AbstractBaseSubjectModel):
         # If sidereal mode is set, zodiac type must be Sidereal
         if value and info.data.get('zodiac_type') != "Sidereal":
             raise ValueError(f"Invalid sidereal_mode '{value}'. Please use 'Sidereal' as zodiac_type when sidereal_mode is set. If you want to use the default sidereal mode, do not set this field or set it to None.")
+        return value
+
+    @field_validator("perspective_type")
+    def validate_perspective_type(cls, value, info):
+        # If it's none, set it to the default value
+        if not value:
+            return "Apparent Geocentric"
+        return value
+
+    @field_validator("houses_system_identifier")
+    def validate_houses_system_identifier(cls, value, info):
+        # If it's none, set it to the default value
+        if not value:
+            return "P"
         return value
 
 class TransitSubjectModel(AbstractBaseSubjectModel):
