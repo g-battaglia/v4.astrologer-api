@@ -70,7 +70,7 @@ class AbstractBaseSubjectModel(BaseModel, ABC):
 
     @field_validator("year")
     def validate_year(cls, value):
-        if value < 0 or value > 2100:
+        if value < 1800 or value > 2100:
             raise ValueError(f"Invalid year '{value}'. Please use a value between 1800 and 2300.")
         return value
 
