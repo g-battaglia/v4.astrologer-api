@@ -290,11 +290,15 @@ Since it is an external API service, integrating data and charts retrieved via t
 
 ## Commercial Use
 
-The Astrologer API can be used in commercial applications, as it operates as an external API. If your application does not directly integrate Kerykeion or other underlying libraries, there are no additional restrictions.
+The Astrologer API can be freely used in both open-source and closed-source commercial applications without restrictions, as it functions as an external service.
 
 For full compliance, we recommend adding this statement in your Terms and Conditions or elsewhere on your site/app:
 
-"Astrological data and charts on this site are generated using AstrologerAPI [link], an open-source third-party service licensed under AGPL v3. Source code: [link]."
+"""
+Astrological data and charts on this site are generated using AstrologerAPI[https://rapidapi.com/gbattaglia/api/astrologer], an open-source third-party service licensed under AGPL v3. Source code:
+- [V4 Astrologer API](https://github.com/g-battaglia/v4.astrologer-api)
+- [V3 Astrologer API](https://github.com/g-battaglia/Astrologer-API)
+"""
 
 This guarantees full transparency and complete licensing compliance, leaving no room for doubt.
 
