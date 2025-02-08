@@ -3,6 +3,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from logging import getLogger
 from kerykeion import AstrologicalSubject, KerykeionChartSVG, SynastryAspects, NatalAspects, RelationshipScoreFactory
+from kerykeion.settings.config_constants import DEFAULT_ACTIVE_POINTS
 from requests import get as requests_get
 
 # Local
@@ -156,6 +157,7 @@ async def birth_chart(request_body: BirthChartRequestModel, request: Request):
             astrological_subject,
             theme=request_body.theme,
             chart_language=request_body.language or "EN",
+            active_points=request_body.active_points or DEFAULT_ACTIVE_POINTS,
         )
 
         if request_body.wheel_only:
@@ -230,6 +232,7 @@ async def synastry_chart(synastry_chart_request: SynastryChartRequestModel, requ
             chart_type="Synastry",
             theme=synastry_chart_request.theme,
             chart_language=synastry_chart_request.language or "EN",
+            active_points=synastry_chart_request.active_points or DEFAULT_ACTIVE_POINTS,
         )
 
         if synastry_chart_request.wheel_only:
@@ -307,6 +310,7 @@ async def transit_chart(transit_chart_request: TransitChartRequestModel, request
             chart_type="Transit",
             theme=transit_chart_request.theme,
             chart_language=transit_chart_request.language or "EN",
+            active_points=transit_chart_request.active_points or DEFAULT_ACTIVE_POINTS,
         )
 
         if transit_chart_request.wheel_only:
@@ -378,7 +382,11 @@ async def synastry_aspects_data(aspects_request_content: SynastryAspectsRequestM
             online=False,
         )
 
-        aspects = SynastryAspects(first_astrological_subject, second_astrological_subject).relevant_aspects
+        aspects = SynastryAspects(
+            first_astrological_subject,
+            second_astrological_subject,
+            active_points=aspects_request_content.active_points or DEFAULT_ACTIVE_POINTS
+        ).relevant_aspects
 
         return JSONResponse(
             content={
@@ -423,7 +431,10 @@ async def natal_aspects_data(aspects_request_content: NatalAspectsRequestModel, 
             online=False,
         )
 
-        aspects = NatalAspects(first_astrological_subject).relevant_aspects
+        aspects = NatalAspects(
+            first_astrological_subject,
+            active_points=aspects_request_content.active_points or DEFAULT_ACTIVE_POINTS
+        ).relevant_aspects
 
         return JSONResponse(
             content={

@@ -1,7 +1,8 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, get_args, Union
 from pytz import all_timezones
-from kerykeion.kr_types.kr_literals import KerykeionChartTheme, KerykeionChartLanguage, SiderealMode, ZodiacType, HousesSystemIdentifier, PerspectiveType
+from kerykeion.kr_types.kr_literals import KerykeionChartTheme, KerykeionChartLanguage, SiderealMode, ZodiacType, HousesSystemIdentifier, PerspectiveType, AxialCusps, Planet
+from kerykeion.settings.config_constants import DEFAULT_ACTIVE_POINTS
 from abc import ABC
 
 class AbstractBaseSubjectModel(BaseModel, ABC):
@@ -126,6 +127,7 @@ class BirthChartRequestModel(BaseModel):
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
     wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
+    active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
 
 class SynastryChartRequestModel(BaseModel):
     """
@@ -137,6 +139,7 @@ class SynastryChartRequestModel(BaseModel):
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
     wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
+    active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
 
 class TransitChartRequestModel(BaseModel):
     """
@@ -148,7 +151,7 @@ class TransitChartRequestModel(BaseModel):
     theme: Optional[KerykeionChartTheme] = Field(default="classic", description="The theme of the chart.", examples=["classic", "light", "dark", "dark-high-contrast"])
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
     wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
-
+    active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
 
 class BirthDataRequestModel(BaseModel):
     """
@@ -174,7 +177,7 @@ class SynastryAspectsRequestModel(BaseModel):
 
     first_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     second_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
-
+    active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
 
 class NatalAspectsRequestModel(BaseModel):
     """
@@ -182,3 +185,4 @@ class NatalAspectsRequestModel(BaseModel):
     """
 
     subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
+    active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
