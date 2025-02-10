@@ -517,6 +517,37 @@
   },
   "components": {
     "schemas": {
+      "ActiveAspect": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "conjunction",
+              "semi-sextile",
+              "semi-square",
+              "sextile",
+              "quintile",
+              "square",
+              "trine",
+              "sesquiquadrate",
+              "biquintile",
+              "quincunx",
+              "opposition"
+            ],
+            "title": "Name"
+          },
+          "orb": {
+            "type": "integer",
+            "title": "Orb"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "orb"
+        ],
+        "title": "ActiveAspect"
+      },
       "AspectModel": {
         "properties": {
           "p1_name": {
@@ -765,6 +796,18 @@
           "pluto": {
             "$ref": "#/components/schemas/KerykeionPointModel"
           },
+          "ascendant": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "descendant": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "medium_coeli": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
+          "imum_coeli": {
+            "$ref": "#/components/schemas/KerykeionPointModel"
+          },
           "chiron": {
             "anyOf": [
               {
@@ -833,9 +876,6 @@
           "true_south_node": {
             "$ref": "#/components/schemas/KerykeionPointModel"
           },
-          "lunar_phase": {
-            "$ref": "#/components/schemas/LunarPhaseModel"
-          },
           "planets_names_list": {
             "items": {
               "type": "string",
@@ -861,6 +901,19 @@
             "type": "array",
             "title": "Planets Names List"
           },
+          "axial_cusps_names_list": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "Ascendant",
+                "Medium_Coeli",
+                "Descendant",
+                "Imum_Coeli"
+              ]
+            },
+            "type": "array",
+            "title": "Axial Cusps Names List"
+          },
           "houses_names_list": {
             "items": {
               "type": "string",
@@ -881,6 +934,9 @@
             },
             "type": "array",
             "title": "Houses Names List"
+          },
+          "lunar_phase": {
+            "$ref": "#/components/schemas/LunarPhaseModel"
           }
         },
         "type": "object",
@@ -916,6 +972,10 @@
           "uranus",
           "neptune",
           "pluto",
+          "ascendant",
+          "descendant",
+          "medium_coeli",
+          "imum_coeli",
           "chiron",
           "mean_lilith",
           "first_house",
@@ -934,9 +994,10 @@
           "true_node",
           "mean_south_node",
           "true_south_node",
-          "lunar_phase",
           "planets_names_list",
-          "houses_names_list"
+          "axial_cusps_names_list",
+          "houses_names_list",
+          "lunar_phase"
         ],
         "title": "AstrologicalSubjectModel"
       },
@@ -1020,6 +1081,159 @@
             "title": "Wheel Only",
             "description": "If set to True, only the zodiac wheel will be returned. No additional information will be displayed.",
             "default": false
+          },
+          "active_points": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Sun",
+                        "Moon",
+                        "Mercury",
+                        "Venus",
+                        "Mars",
+                        "Jupiter",
+                        "Saturn",
+                        "Uranus",
+                        "Neptune",
+                        "Pluto",
+                        "Mean_Node",
+                        "True_Node",
+                        "Mean_South_Node",
+                        "True_South_Node",
+                        "Chiron",
+                        "Mean_Lilith"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Ascendant",
+                        "Medium_Coeli",
+                        "Descendant",
+                        "Imum_Coeli"
+                      ]
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Points",
+            "description": "The active points to display in the chart.",
+            "default": [
+              "Sun",
+              "Moon",
+              "Mercury",
+              "Venus",
+              "Mars",
+              "Jupiter",
+              "Saturn",
+              "Uranus",
+              "Neptune",
+              "Pluto",
+              "Mean_Node",
+              "Chiron",
+              "Ascendant",
+              "Medium_Coeli",
+              "Mean_Lilith",
+              "Mean_South_Node"
+            ],
+            "examples": [
+              [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Mean_Node",
+                "Chiron",
+                "Ascendant",
+                "Medium_Coeli",
+                "Mean_Lilith",
+                "Mean_South_Node"
+              ]
+            ]
+          },
+          "active_aspects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ActiveAspect"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Aspects",
+            "description": "The active aspects to display in the chart.",
+            "default": [
+              {
+                "name": "conjunction",
+                "orb": 10
+              },
+              {
+                "name": "opposition",
+                "orb": 10
+              },
+              {
+                "name": "trine",
+                "orb": 8
+              },
+              {
+                "name": "sextile",
+                "orb": 6
+              },
+              {
+                "name": "square",
+                "orb": 5
+              },
+              {
+                "name": "quintile",
+                "orb": 1
+              }
+            ],
+            "examples": [
+              [
+                {
+                  "name": "conjunction",
+                  "orb": 10
+                },
+                {
+                  "name": "opposition",
+                  "orb": 10
+                },
+                {
+                  "name": "trine",
+                  "orb": 8
+                },
+                {
+                  "name": "sextile",
+                  "orb": 6
+                },
+                {
+                  "name": "square",
+                  "orb": 5
+                },
+                {
+                  "name": "quintile",
+                  "orb": 1
+                }
+              ]
+            ]
           }
         },
         "type": "object",
@@ -1402,6 +1616,15 @@
                   "Eleventh_House",
                   "Twelfth_House"
                 ]
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "Ascendant",
+                  "Medium_Coeli",
+                  "Descendant",
+                  "Imum_Coeli"
+                ]
               }
             ],
             "title": "Name"
@@ -1477,7 +1700,8 @@
             "type": "string",
             "enum": [
               "Planet",
-              "House"
+              "House",
+              "AxialCusps"
             ],
             "title": "Point Type"
           },
@@ -1598,6 +1822,159 @@
           "subject": {
             "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
+          },
+          "active_points": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Sun",
+                        "Moon",
+                        "Mercury",
+                        "Venus",
+                        "Mars",
+                        "Jupiter",
+                        "Saturn",
+                        "Uranus",
+                        "Neptune",
+                        "Pluto",
+                        "Mean_Node",
+                        "True_Node",
+                        "Mean_South_Node",
+                        "True_South_Node",
+                        "Chiron",
+                        "Mean_Lilith"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Ascendant",
+                        "Medium_Coeli",
+                        "Descendant",
+                        "Imum_Coeli"
+                      ]
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Points",
+            "description": "The active points to display in the chart.",
+            "default": [
+              "Sun",
+              "Moon",
+              "Mercury",
+              "Venus",
+              "Mars",
+              "Jupiter",
+              "Saturn",
+              "Uranus",
+              "Neptune",
+              "Pluto",
+              "Mean_Node",
+              "Chiron",
+              "Ascendant",
+              "Medium_Coeli",
+              "Mean_Lilith",
+              "Mean_South_Node"
+            ],
+            "examples": [
+              [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Mean_Node",
+                "Chiron",
+                "Ascendant",
+                "Medium_Coeli",
+                "Mean_Lilith",
+                "Mean_South_Node"
+              ]
+            ]
+          },
+          "active_aspects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ActiveAspect"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Aspects",
+            "description": "The active aspects to display in the chart.",
+            "default": [
+              {
+                "name": "conjunction",
+                "orb": 10
+              },
+              {
+                "name": "opposition",
+                "orb": 10
+              },
+              {
+                "name": "trine",
+                "orb": 8
+              },
+              {
+                "name": "sextile",
+                "orb": 6
+              },
+              {
+                "name": "square",
+                "orb": 5
+              },
+              {
+                "name": "quintile",
+                "orb": 1
+              }
+            ],
+            "examples": [
+              [
+                {
+                  "name": "conjunction",
+                  "orb": 10
+                },
+                {
+                  "name": "opposition",
+                  "orb": 10
+                },
+                {
+                  "name": "trine",
+                  "orb": 8
+                },
+                {
+                  "name": "sextile",
+                  "orb": 6
+                },
+                {
+                  "name": "square",
+                  "orb": 5
+                },
+                {
+                  "name": "quintile",
+                  "orb": 1
+                }
+              ]
+            ]
           }
         },
         "type": "object",
@@ -2000,6 +2377,159 @@
           "second_subject": {
             "$ref": "#/components/schemas/SubjectModel",
             "description": "The name of the person to get the Birth Chart for."
+          },
+          "active_points": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Sun",
+                        "Moon",
+                        "Mercury",
+                        "Venus",
+                        "Mars",
+                        "Jupiter",
+                        "Saturn",
+                        "Uranus",
+                        "Neptune",
+                        "Pluto",
+                        "Mean_Node",
+                        "True_Node",
+                        "Mean_South_Node",
+                        "True_South_Node",
+                        "Chiron",
+                        "Mean_Lilith"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Ascendant",
+                        "Medium_Coeli",
+                        "Descendant",
+                        "Imum_Coeli"
+                      ]
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Points",
+            "description": "The active points to display in the chart.",
+            "default": [
+              "Sun",
+              "Moon",
+              "Mercury",
+              "Venus",
+              "Mars",
+              "Jupiter",
+              "Saturn",
+              "Uranus",
+              "Neptune",
+              "Pluto",
+              "Mean_Node",
+              "Chiron",
+              "Ascendant",
+              "Medium_Coeli",
+              "Mean_Lilith",
+              "Mean_South_Node"
+            ],
+            "examples": [
+              [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Mean_Node",
+                "Chiron",
+                "Ascendant",
+                "Medium_Coeli",
+                "Mean_Lilith",
+                "Mean_South_Node"
+              ]
+            ]
+          },
+          "active_aspects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ActiveAspect"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Aspects",
+            "description": "The active aspects to display in the chart.",
+            "default": [
+              {
+                "name": "conjunction",
+                "orb": 10
+              },
+              {
+                "name": "opposition",
+                "orb": 10
+              },
+              {
+                "name": "trine",
+                "orb": 8
+              },
+              {
+                "name": "sextile",
+                "orb": 6
+              },
+              {
+                "name": "square",
+                "orb": 5
+              },
+              {
+                "name": "quintile",
+                "orb": 1
+              }
+            ],
+            "examples": [
+              [
+                {
+                  "name": "conjunction",
+                  "orb": 10
+                },
+                {
+                  "name": "opposition",
+                  "orb": 10
+                },
+                {
+                  "name": "trine",
+                  "orb": 8
+                },
+                {
+                  "name": "sextile",
+                  "orb": 6
+                },
+                {
+                  "name": "square",
+                  "orb": 5
+                },
+                {
+                  "name": "quintile",
+                  "orb": 1
+                }
+              ]
+            ]
           }
         },
         "type": "object",
@@ -2123,6 +2653,159 @@
             "title": "Wheel Only",
             "description": "If set to True, only the zodiac wheel will be returned. No additional information will be displayed.",
             "default": false
+          },
+          "active_points": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Sun",
+                        "Moon",
+                        "Mercury",
+                        "Venus",
+                        "Mars",
+                        "Jupiter",
+                        "Saturn",
+                        "Uranus",
+                        "Neptune",
+                        "Pluto",
+                        "Mean_Node",
+                        "True_Node",
+                        "Mean_South_Node",
+                        "True_South_Node",
+                        "Chiron",
+                        "Mean_Lilith"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Ascendant",
+                        "Medium_Coeli",
+                        "Descendant",
+                        "Imum_Coeli"
+                      ]
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Points",
+            "description": "The active points to display in the chart.",
+            "default": [
+              "Sun",
+              "Moon",
+              "Mercury",
+              "Venus",
+              "Mars",
+              "Jupiter",
+              "Saturn",
+              "Uranus",
+              "Neptune",
+              "Pluto",
+              "Mean_Node",
+              "Chiron",
+              "Ascendant",
+              "Medium_Coeli",
+              "Mean_Lilith",
+              "Mean_South_Node"
+            ],
+            "examples": [
+              [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Mean_Node",
+                "Chiron",
+                "Ascendant",
+                "Medium_Coeli",
+                "Mean_Lilith",
+                "Mean_South_Node"
+              ]
+            ]
+          },
+          "active_aspects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ActiveAspect"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Aspects",
+            "description": "The active aspects to display in the chart.",
+            "default": [
+              {
+                "name": "conjunction",
+                "orb": 10
+              },
+              {
+                "name": "opposition",
+                "orb": 10
+              },
+              {
+                "name": "trine",
+                "orb": 8
+              },
+              {
+                "name": "sextile",
+                "orb": 6
+              },
+              {
+                "name": "square",
+                "orb": 5
+              },
+              {
+                "name": "quintile",
+                "orb": 1
+              }
+            ],
+            "examples": [
+              [
+                {
+                  "name": "conjunction",
+                  "orb": 10
+                },
+                {
+                  "name": "opposition",
+                  "orb": 10
+                },
+                {
+                  "name": "trine",
+                  "orb": 8
+                },
+                {
+                  "name": "sextile",
+                  "orb": 6
+                },
+                {
+                  "name": "square",
+                  "orb": 5
+                },
+                {
+                  "name": "quintile",
+                  "orb": 1
+                }
+              ]
+            ]
           }
         },
         "type": "object",
@@ -2251,6 +2934,159 @@
             "title": "Wheel Only",
             "description": "If set to True, only the zodiac wheel will be returned. No additional information will be displayed.",
             "default": false
+          },
+          "active_points": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Sun",
+                        "Moon",
+                        "Mercury",
+                        "Venus",
+                        "Mars",
+                        "Jupiter",
+                        "Saturn",
+                        "Uranus",
+                        "Neptune",
+                        "Pluto",
+                        "Mean_Node",
+                        "True_Node",
+                        "Mean_South_Node",
+                        "True_South_Node",
+                        "Chiron",
+                        "Mean_Lilith"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "enum": [
+                        "Ascendant",
+                        "Medium_Coeli",
+                        "Descendant",
+                        "Imum_Coeli"
+                      ]
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Points",
+            "description": "The active points to display in the chart.",
+            "default": [
+              "Sun",
+              "Moon",
+              "Mercury",
+              "Venus",
+              "Mars",
+              "Jupiter",
+              "Saturn",
+              "Uranus",
+              "Neptune",
+              "Pluto",
+              "Mean_Node",
+              "Chiron",
+              "Ascendant",
+              "Medium_Coeli",
+              "Mean_Lilith",
+              "Mean_South_Node"
+            ],
+            "examples": [
+              [
+                "Sun",
+                "Moon",
+                "Mercury",
+                "Venus",
+                "Mars",
+                "Jupiter",
+                "Saturn",
+                "Uranus",
+                "Neptune",
+                "Pluto",
+                "Mean_Node",
+                "Chiron",
+                "Ascendant",
+                "Medium_Coeli",
+                "Mean_Lilith",
+                "Mean_South_Node"
+              ]
+            ]
+          },
+          "active_aspects": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ActiveAspect"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active Aspects",
+            "description": "The active aspects to display in the chart.",
+            "default": [
+              {
+                "name": "conjunction",
+                "orb": 10
+              },
+              {
+                "name": "opposition",
+                "orb": 10
+              },
+              {
+                "name": "trine",
+                "orb": 8
+              },
+              {
+                "name": "sextile",
+                "orb": 6
+              },
+              {
+                "name": "square",
+                "orb": 5
+              },
+              {
+                "name": "quintile",
+                "orb": 1
+              }
+            ],
+            "examples": [
+              [
+                {
+                  "name": "conjunction",
+                  "orb": 10
+                },
+                {
+                  "name": "opposition",
+                  "orb": 10
+                },
+                {
+                  "name": "trine",
+                  "orb": 8
+                },
+                {
+                  "name": "sextile",
+                  "orb": 6
+                },
+                {
+                  "name": "square",
+                  "orb": 5
+                },
+                {
+                  "name": "quintile",
+                  "orb": 1
+                }
+              ]
+            ]
           }
         },
         "type": "object",

@@ -1,8 +1,9 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, get_args, Union
+from kerykeion.kr_types.kr_models import ActiveAspect
 from pytz import all_timezones
 from kerykeion.kr_types.kr_literals import KerykeionChartTheme, KerykeionChartLanguage, SiderealMode, ZodiacType, HousesSystemIdentifier, PerspectiveType, AxialCusps, Planet
-from kerykeion.settings.config_constants import DEFAULT_ACTIVE_POINTS
+from kerykeion.settings.config_constants import DEFAULT_ACTIVE_POINTS, DEFAULT_ACTIVE_ASPECTS
 from abc import ABC
 
 class AbstractBaseSubjectModel(BaseModel, ABC):
@@ -128,6 +129,7 @@ class BirthChartRequestModel(BaseModel):
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
     wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
     active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
+    active_aspects: Optional[list[ActiveAspect]] = Field(default=DEFAULT_ACTIVE_ASPECTS, description="The active aspects to display in the chart.", examples=[DEFAULT_ACTIVE_ASPECTS])
 
 class SynastryChartRequestModel(BaseModel):
     """
@@ -140,6 +142,7 @@ class SynastryChartRequestModel(BaseModel):
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
     wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
     active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
+    active_aspects: Optional[list[ActiveAspect]] = Field(default=DEFAULT_ACTIVE_ASPECTS, description="The active aspects to display in the chart.", examples=[DEFAULT_ACTIVE_ASPECTS])
 
 class TransitChartRequestModel(BaseModel):
     """
@@ -152,6 +155,7 @@ class TransitChartRequestModel(BaseModel):
     language: Optional[KerykeionChartLanguage] = Field(default="EN", description="The language of the chart.", examples=list(get_args(KerykeionChartLanguage)))
     wheel_only: Optional[bool] = Field(default=False, description="If set to True, only the zodiac wheel will be returned. No additional information will be displayed.")
     active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
+    active_aspects: Optional[list[ActiveAspect]] = Field(default=DEFAULT_ACTIVE_ASPECTS, description="The active aspects to display in the chart.", examples=[DEFAULT_ACTIVE_ASPECTS])
 
 class BirthDataRequestModel(BaseModel):
     """
@@ -178,6 +182,7 @@ class SynastryAspectsRequestModel(BaseModel):
     first_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     second_subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
+    active_aspects: Optional[list[ActiveAspect]] = Field(default=DEFAULT_ACTIVE_ASPECTS, description="The active aspects to display in the chart.", examples=[DEFAULT_ACTIVE_ASPECTS])
 
 class NatalAspectsRequestModel(BaseModel):
     """
@@ -186,3 +191,4 @@ class NatalAspectsRequestModel(BaseModel):
 
     subject: SubjectModel = Field(description="The name of the person to get the Birth Chart for.")
     active_points: Optional[list[Union[Planet, AxialCusps]]] = Field(default=DEFAULT_ACTIVE_POINTS, description="The active points to display in the chart.", examples=[DEFAULT_ACTIVE_POINTS])
+    active_aspects: Optional[list[ActiveAspect]] = Field(default=DEFAULT_ACTIVE_ASPECTS, description="The active aspects to display in the chart.", examples=[DEFAULT_ACTIVE_ASPECTS])
