@@ -200,7 +200,6 @@ def test_birth_chart():
     assert response.json()["aspects"][0]["aspect"] == "sextile"
     assert round(response.json()["aspects"][0]["orbit"]) == -2
     assert response.json()["aspects"][0]["aspect_degrees"] == 60
-    assert response.json()["aspects"][0]["aid"] == 3
     assert round(response.json()["aspects"][0]["diff"]) == 58
     assert response.json()["aspects"][0]["p1"] == 0
     assert response.json()["aspects"][0]["p2"] == 1

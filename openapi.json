@@ -585,11 +585,6 @@
             "title": "Aspect Degrees",
             "description": "The degrees of the aspect."
           },
-          "aid": {
-            "type": "integer",
-            "title": "Aid",
-            "description": "The aspect id."
-          },
           "diff": {
             "type": "number",
             "title": "Diff",
@@ -615,7 +610,6 @@
           "aspect",
           "orbit",
           "aspect_degrees",
-          "aid",
           "diff",
           "p1",
           "p2"
