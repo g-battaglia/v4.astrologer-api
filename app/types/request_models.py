@@ -87,7 +87,37 @@ class SubjectModel(AbstractBaseSubjectModel):
     zodiac_type: Optional[ZodiacType] = Field(default="Tropic", description="The type of zodiac used (Tropic or Sidereal).", examples=list(get_args(ZodiacType)))
     sidereal_mode: Union[SiderealMode, None] = Field(default=None, description="The sidereal mode used.", examples=[None])
     perspective_type: Union[PerspectiveType, None] = Field(default="Apparent Geocentric", description="The perspective type used.", examples=list(get_args(PerspectiveType)))
-    houses_system_identifier: Union[HousesSystemIdentifier, None] = Field(default="P", description="The houses system used.", examples=['P'])
+    houses_system_identifier: Union[HousesSystemIdentifier, None] = Field(
+        default="P",
+        examples=['P'],
+        description=(
+            "The house system to use. The following are the available house systems: "
+            "A = equal "
+            "B = Alcabitius "
+            "C = Campanus "
+            "D = equal (MC) "
+            "F = Carter poli-equ. "
+            "H = horizon/azimut "
+            "I = Sunshine "
+            "i = Sunshine/alt. "
+            "K = Koch "
+            "L = Pullen SD "
+            "M = Morinus "
+            "N = equal/1=Aries "
+            "O = Porphyry "
+            "P = Placidus "
+            "Q = Pullen SR "
+            "R = Regiomontanus "
+            "S = Sripati "
+            "T = Polich/Page "
+            "U = Krusinski-Pisa-Goelzer "
+            "V = equal/Vehlow "
+            "W = equal/whole sign "
+            "X = axial rotation system/Meridian houses "
+            "Y = APC houses "
+            "Usually the standard is Placidus (P)"
+        )
+    )
 
     @field_validator("zodiac_type")
     def validate_zodiac_type(cls, value, info):
