@@ -1,5 +1,7 @@
 # Astrologer API
 
+***Moved to the main repo: [Astrologer API](https://github.com/g-battaglia/Astrologer-API)***
+
 The Astrologer API is a RESTful service providing extensive astrology calculations, designed for seamless integration into your projects. It offers a rich set of astrological data and insights, making it an invaluable tool for both developers and astrology enthusiasts.
 
 ## Documentation
